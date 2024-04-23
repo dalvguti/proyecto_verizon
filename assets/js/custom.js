@@ -1,17 +1,9 @@
 let imageFolder = "";
 let videoFolder = "";
 let pageNumber = 1;
+let intervalId = null;
 const allowedImages = ['.jpg', '.png', '.gif'];
 const getExtension = str => str.slice(str.lastIndexOf("."));
-
-$(document).ready(function() {
-    $('#building-menu a').on('click', function(){
-        $("#homescreen-image").attr('src', imageFolder + $(this).attr('item-image'));
-        setTimeout(function(){
-            $("#homescreen-image").attr('src', imageFolder + 'home.jpg');
-        }, 5000);
-    });
-});
 
 window.onresize = calculate_building_position;
 
@@ -72,6 +64,12 @@ function build_page(page_number) {
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
                         $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
+                        countdown(5);
+                        setTimeout(function(){
+                            $("#homescreen-image").attr('src', imageFolder + 'home.jpg');
+                            clearInterval(intervalId);    
+                            $("#countdown").addClass("hidden-element");                        
+                        }, 5000);
                     });                    
                 } else {
                     new_ele.on('click',function() {
@@ -129,4 +127,15 @@ function hide_building_names(value=true) {
         $(".building-select").removeClass("hidden-element");
         $("#back-button").addClass("hidden-element");
     }
+}
+
+function countdown(seconds) {
+    $("#countdown").removeClass("hidden-element");
+    var countdownNumberEl = document.getElementById('countdown-number');
+    var countdown = seconds;
+    countdownNumberEl.textContent = countdown;
+    intervalId = setInterval(function() {
+        countdown = --countdown <= 0 ? seconds : countdown;
+        countdownNumberEl.textContent = countdown;            
+    }, 1000);
 }
