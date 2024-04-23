@@ -1,0 +1,77 @@
+#main-content {
+    width: 100%;
+    height: 100%;
+    margin: 100px auto;
+    position: relative;
+}
+
+#back-button {
+  position: absolute;
+  bottom: 15px;
+  left: 2%;
+  border-radius: 5px;
+  color: white;
+  opacity: 0.8;
+  background-color: black;
+  padding: 5px 20px 5px 20px;
+  z-index: 2;
+}
+
+.building-select {
+  position: absolute;
+}
+
+.hidden-element {
+  display: none;
+}
+
+#building-menu {
+    font-family: Georgia, serif;
+    padding: 5px;
+    z-index: 100;
+    position: absolute;
+    bottom: 15px;
+    right: 2%;
+    width: 350px;
+}
+
+#building-menu a {
+  font-size: 0.9em;
+  display: block;
+  margin: 5px 0.5em;
+  font-weight: bold;
+}
+
+#building-menu a {
+  border-radius: 5px;
+  background-color: white;
+  padding: 5px;
+  cursor: grab;
+  opacity: 0.8;
+}
+
+#building-menu-content {
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  border-radius: 5px;
+  margin: 5px 0.5em;
+  padding: 20px 10px 20px 10px;
+}
+
+#building-menu-title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#building-menu-description p {
+  font-size: 0.8em;
+}
+
+@media (min-width: 1024px) {
+    #main-content {
+        margin: 0 auto;
+        width: 80%;        
+    }
+    
+}
