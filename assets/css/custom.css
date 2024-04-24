@@ -85,9 +85,12 @@ html, body {
     padding: 5px;
     z-index: 100;
     position: absolute;
-    bottom: 15px;
     right: 2%;
-    width: 350px;
+    width: 450px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 98%;
 }
 
 #building-menu a {

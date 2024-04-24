@@ -60,13 +60,13 @@ function calculate_building_position() {
 }
 
 function build_page(page_number) {
-    var mydata = JSON.parse(data)['pages'];
+    var mydata = JSON.parse(data);
     var imageHome = mydata['image-home'];
     $("#building-menu-items").html('');
     $("#building-menu-title").html(''); 
     $("#building-menu-description").html('');
     $('#back-button').unbind('click');
-    $(mydata).each(function(){
+    $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
             if (this['page-title'] !== "None")
                 $("#building-menu-title").html(this['page-title']);

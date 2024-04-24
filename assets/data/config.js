@@ -108,27 +108,27 @@ data =
                 '"menu-items": [' +
                     '{' +
                         '"item-name": "Business Outcome 1",' +
-                        '"item-image": "building1.jpg"' +                
+                        '"item-image": "Business_Outcome_1_00000.png"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 2",' +
-                        '"item-image": "building2.jpg"' +                
+                        '"item-image": "Business_Outcome_2_00000.png"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 3",' +
-                        '"item-image": "building3.jpg"' +                
+                        '"item-image": "Business_Outcome_3_00000.png"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 4",' +
-                        '"item-image": "building4.jpg"' +                
+                        '"item-image": "Business_Outcome_4_00000.png"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 5",' +
-                        '"item-image": "building5.jpg"' +                
+                        '"item-image": "Business_Outcome_5_00000.png"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 6",' +
-                        '"item-image": "building6.jpg"' +                
+                        '"item-image": "Business_Outcome_6_00000.png"' +                
                     '}' + 
                 ']' +
             '},' +
