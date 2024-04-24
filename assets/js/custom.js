@@ -1,9 +1,20 @@
 let imageFolder = "";
 let videoFolder = "";
+let imageWidth = "";
+let loadingImage = false;
 let pageNumber = 1;
 let intervalId = null;
 const allowedImages = ['.jpg', '.png', '.gif'];
 const getExtension = str => str.slice(str.lastIndexOf("."));
+let loadPromise = new Promise(function(resolve, reject) {
+    img = document.getElementById('homescreen-image');
+    img.addEventListener('load', function() {
+       resolve();
+    });
+    setTimeout(() => {
+        if (!img.complete) reject('Timeout');
+    }, 5000)
+});
 
 window.onresize = calculate_building_position;
 
@@ -14,30 +25,31 @@ function initialize() {
     document.title = mydata['title'];
     $("#back-button").html(mydata['back-button']);
     build_page(1);
-    calculate_building_position();
+    loadPromise.then(() => {
+        var imageWidthTemp = getComputedStyle(document.getElementById("homescreen-image")).width;
+        imageWidth = imageWidthTemp.replace('px','');
+        calculate_building_position();        
+    });
 }
 
-function calculate_building_position() {
+function calculate_building_position() {    
+    $('#homescreen-image').attr('style', 'max-height:'+(document.body.offsetHeight * 0.99)+'px');
     var mydata = JSON.parse(data)['buildings'];
-
-    /* Position of the buildings */
-    var img = document.getElementById('homescreen-image'); 
-    var width = img.clientWidth;
-
     $(mydata).each(function(){
         var elementName = this['element-name'];
         document.getElementById(elementName).style.height = eval(this['height'])+"px";
         document.getElementById(elementName).style.width = eval(this['width'])+"px";
         document.getElementById(elementName).style.top = this['top'];
         document.getElementById(elementName).style.left = this['left'];
-        document.getElementById(elementName).style.transform = this['transform'];
+        document.getElementById(elementName).style.transform = "rotate("+this['transform']+"deg)";
         $("#"+elementName).attr('next_page', this['page-number']);
         $("#"+elementName).attr('transition_img', this['transition']);
-        tippy('#'+elementName, {
-            content: this['name'],
-            arrow: true,
-            followCursor: true,
-        });
+        $("#"+elementName+' .building-label').html('');
+        $("#"+elementName+' .building-label').append('<p>'+this['name']+'</p>').append('<div class="'+this['class-name']+'"></div>');
+        $("#"+elementName+' .building-label').css('top', this['name-top']);
+        $("#"+elementName+' .building-label').css('left', this['name-left']);
+        document.getElementById(elementName).getElementsByClassName('building-label')[0].style.transform = "rotate("+(-1*this['transform'])+"deg)";
+        $("#"+elementName).unbind('click');
         document.getElementById(elementName).addEventListener("click", function(e){
             $("#homescreen-image").attr('src', imageFolder + $("#"+e.target.id).attr("transition_img"));
             setTimeout(function(){
@@ -49,6 +61,7 @@ function calculate_building_position() {
 
 function build_page(page_number) {
     var mydata = JSON.parse(data)['pages'];
+    var imageHome = mydata['image-home'];
     $("#building-menu-items").html('');
     $("#building-menu-title").html(''); 
     $("#building-menu-description").html('');
@@ -66,7 +79,7 @@ function build_page(page_number) {
                         $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
                         countdown(5);
                         setTimeout(function(){
-                            $("#homescreen-image").attr('src', imageFolder + 'home.jpg');
+                            $("#homescreen-image").attr('src', imageFolder + imageHome);
                             clearInterval(intervalId);    
                             $("#countdown").addClass("hidden-element");                        
                         }, 5000);
@@ -87,6 +100,7 @@ function build_page(page_number) {
                 $("#building-menu").removeClass('hidden-element');                
             }    
             if (allowedImages.includes(getExtension(this['page-img']))) {
+                loadingImage = true;
                 $("#homescreen-image").removeClass('hidden-element');
                 $("#homescreen-video").addClass('hidden-element');
                 $("#homescreen-image").attr('src', imageFolder + this['page-img']);
@@ -138,4 +152,8 @@ function countdown(seconds) {
         countdown = --countdown <= 0 ? seconds : countdown;
         countdownNumberEl.textContent = countdown;            
     }, 1000);
+}
+
+function isLoadingImage(){
+    return loadingImage;
 }

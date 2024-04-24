@@ -2,7 +2,7 @@ data =
     '{' +
         '"image-folder": "./assets/img/",' +
         '"video-folder": "./assets/videos/",' +
-        '"image-home": "home.jpg",' +
+        '"image-home": "home.png",' +
         '"title": "Título del documento",' +
         '"back-button": "BACK",' +
         '"buildings":[' +
@@ -11,66 +11,84 @@ data =
                 '"page-number":2,' +
                 '"transition": "to_convention_center.gif",' +
                 '"name":"Convention Center",' +
+                '"name-top":"10%",' +
+                '"name-left":"35%",' +
+                '"class-name":"building-label-bottom-right",' +
                 '"top":"17%",' +
                 '"left":"5%",' +
-                '"transform":"rotate(30deg)",' +
-                '"height":"(1.2*(width/10))",' +
-                '"width":"(2*(width/10))"' +                
+                '"transform":30,' +
+                '"height":"(1.2*(imageWidth/10))",' +
+                '"width":"(1.6*(imageWidth/10))"' +                
             '},' +
             '{' +
                 '"element-name":"building2",' +
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Corporate Office",' +
+                '"name-top":"100%",' +
+                '"name-left":"40%",' +
+                '"class-name":"building-label-top-right",' +
                 '"top":"2%",' +
                 '"left":"33%",' +
-                '"transform":"rotate(0deg)",' +
-                '"height":"(2*(width/10))",' +
-                '"width":"(2*(width/10))"' +               
+                '"transform":0,' +
+                '"height":"(1.5*(imageWidth/10))",' +
+                '"width":"(1.5*(imageWidth/10))"' +               
             '},' +
             '{' +
                 '"element-name":"building3",' +
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Healthcare",' +
+                '"name-top":"0%",' +
+                '"name-left":"5%",' +
+                '"class-name":"building-label-bottom-right",' +
                 '"top":"10%",' +
                 '"left":"55%",' +
-                '"transform":"rotate(0deg)",' +
-                '"height":"(0.7*(width/10))",' +
-                '"width":"(1.2*(width/10))"' +               
+                '"transform":0,' +
+                '"height":"(0.7*(imageWidth/10))",' +
+                '"width":"(1.1*(imageWidth/10))"' +               
             '},' +
             '{' +
                 '"element-name":"building4",' +
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Retail",' +
+                '"name-top":"90%",' +
+                '"name-left":"35%",' +
+                '"class-name":"building-label-top-right",' +
                 '"top":"30%",' +
                 '"left":"55%",' +
-                '"transform":"rotate(25deg)",' +
-                '"height":"(0.7*(width/10))",' +
-                '"width":"(1.4*(width/10))"' +              
+                '"transform":25,' +
+                '"height":"(0.7*(imageWidth/10))",' +
+                '"width":"(1.4*(imageWidth/10))"' +              
             '},' +
             '{' +
                 '"element-name":"building5",' +
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Ports",' +
+                '"name-top":"0%",' +
+                '"name-left":"50%",' +
+                '"class-name":"building-label-bottom-right",' +
                 '"top":"65%",' +
-                '"left":"28%",' +
-                '"transform":"rotate(-30deg)",' +
-                '"height":"(1.2*(width/10))",' +
-                '"width":"(2.5*(width/10))"' +               
+                '"left":"24%",' +
+                '"transform":-30,' +
+                '"height":"(1.2*(imageWidth/10))",' +
+                '"width":"(2.5*(imageWidth/10))"' +               
             '},' +
             '{' +
                 '"element-name":"building6",' +
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Manufacturing",' +
-                '"top":"55%",' +
+                '"name-top":"0%",' +
+                '"name-left":"50%",' +
+                '"class-name":"building-label-bottom-right",' +
+                '"top":"50%",' +
                 '"left":"8%",' +
-                '"transform":"rotate(-30deg)",' +
-                '"height":"(1.2*(width/10))",' +
-                '"width":"(2.2*(width/10))"' +                
+                '"transform":-30,' +
+                '"height":"(1.2*(imageWidth/10))",' +
+                '"width":"(2*(imageWidth/10))"' +                
             '}' +
         '],' + 
         '"pages":[' +
@@ -79,7 +97,7 @@ data =
                 '"page-number-previous":0,' +
                 '"page-number-next":2,' +
                 '"page-building":"home",' +
-                '"page-img":"home.jpg",' +
+                '"page-img":"home.png",' +
                 '"page-name":"HomePage",' +
                 '"page-title":"Welcome to the connected city of the future.",' +
                 '"page-description":[' +
@@ -119,7 +137,7 @@ data =
                 '"page-number-previous":1,' +
                 '"page-number-next":3,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.jpg",' +
+                '"page-img":"convention_center.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"Convention Center.",' +
                 '"page-transition":"from_convention_center.gif",' +
@@ -147,7 +165,7 @@ data =
                 '"page-number-previous":2,' +
                 '"page-number-next":4,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.jpg",' +
+                '"page-img":"convention_center.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"WirelessMulti-Carrier Connectivity.",' +
                 '"page-description":[' +
@@ -173,7 +191,7 @@ data =
                 '"page-number-previous":3,' +
                 '"page-number-next":5,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.jpg",' +
+                '"page-img":"convention_center.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"The Problem with Spotty Coverage",' +
                 '"page-description":[' +
@@ -205,7 +223,7 @@ data =
                 '"page-number-previous":3,' +
                 '"page-number-next":7,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.jpg",' +
+                '"page-img":"convention_center.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"Verizon\'s Neutral Host Network with Private Wireless*",' +
                 '"page-description":[' +
@@ -239,7 +257,7 @@ data =
                 '"page-number-previous":3,' +
                 '"page-number-next":9,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.jpg",' +
+                '"page-img":"convention_center.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"Private Wireless Solution",' +
                 '"page-description":[' +
