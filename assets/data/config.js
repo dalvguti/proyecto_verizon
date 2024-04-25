@@ -103,7 +103,7 @@ data =
                 '"page-number-previous":0,' +
                 '"page-building":"home",' +
                 '"page-img":"home.png",' +
-                '"page-audio":"InitialHome.wav",' +
+                '"page-audio":"InitialHome.ogg",' +
                 '"page-subtitles":{' +
                     '"type":"audio",' +
                     '"file":"InitialHome.vtt"' +
@@ -147,7 +147,7 @@ data =
                 '"page-number-previous":1,' +
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
-                '"page-audio":"ConventionCenter_Building.wav",' +
+                '"page-audio":"ConventionCenter_Building.ogg",' +
                 '"page-subtitles":{' +
                     '"type":"audio",' +
                     '"file":"ConventionCenter_Building.vtt"' +
