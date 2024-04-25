@@ -108,7 +108,11 @@ html, body {
   opacity: 0.8;
 }
 
-#building-menu-content {
+#building-menu-problem {
+  margin: 0;
+}
+
+#building-menu-content, #building-menu-content-problem {
   background-color: black;
   opacity: 0.8;
   color: white;
@@ -117,17 +121,55 @@ html, body {
   padding: 20px 10px 20px 10px;
 }
 
-#building-menu-title {
+#building-menu-title, #building-menu-title-problem {
   font-weight: bold;
   font-size: 1.5em;
 }
 
-#building-menu-description p {
+#building-menu-description p, #building-menu-description-problem p {
   font-size: 0.8em;
 }
 
-#homescreen-image {
+#building-menu-content h3, #building-menu-content-problem h3 {
+  margin: 5px 0 5px 0;
+}
+
+#homescreen-image, #homescreen-video {
   width: auto;
+}
+
+#bottom-menu {
+  font-family: Georgia, serif;
+  position: absolute;
+  bottom: 15px;
+  width: 98%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+#bottom-menu a {
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  padding: 5px;
+  cursor: grab;
+  opacity: 0.8;
+  line-height: 2;
+}
+
+#audio-button {
+  background-image: url(../img/sound_off.png);
+  width: 35px;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#bar-button {
+  display: flex;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
@@ -158,7 +200,7 @@ html, body {
   line-height: 40px;
 }
 
-svg {
+#countdown svg {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -167,7 +209,7 @@ svg {
   transform: rotateY(-180deg) rotateZ(-90deg);
 }
 
-svg circle {
+#countdown svg circle {
   stroke-dasharray: 113px;
   stroke-dashoffset: 0px;
   stroke-linecap: round;

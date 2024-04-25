@@ -19,11 +19,21 @@
             </svg>
         </div>
         <div id="building-menu">
-            <div id="building-menu-content">
-                <h3 id="building-menu-title"></h3>
-                <div id="building-menu-description"></div>
+            <div id="building-menu-problem" class="hidden-element">
+                <div id="building-menu-content-problem">
+                    <h3 id="building-menu-title-problem"></h3>
+                    <div id="building-menu-description-problem"></div>
+                </div>
+                <div id="building-menu-items-problem"></div>
             </div>
-            <div id="building-menu-items"></div>
+            <p style="margin: 0;">&nbsp;</p>
+            <div id="building-menu-main" class="hidden-element">
+                <div id="building-menu-content">
+                    <h3 id="building-menu-title"></h3>
+                    <div id="building-menu-description"></div>
+                </div>
+                <div id="building-menu-items"></div>
+            </div>            
         </div>
         <div id="building1" class="building-select"><div class="building-label"></div></div>
         <div id="building2" class="building-select"><div class="building-label"></div></div>
@@ -32,9 +42,24 @@
         <div id="building5" class="building-select"><div class="building-label"></div></div>
         <div id="building6" class="building-select"><div class="building-label"></div></div>
         <button id="back-button"></button>
-        <video id="homescreen-video" class="hidden-element" width="100%" autoplay>
+        <nav id="bottom-menu">
+            <a id="audio-button" state="off"></a>
+            <a id="bar-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </a>
+            <a id="guide-button"></a>
+            <a id="caption-button">CC</a>
+        </nav>
+        <video id="homescreen-video" class="hidden-element" width="100%" autoplay loop>
             <source src="" type="">
         </video>
+        <audio id="homescreen-audio" class="hidden-element" autoplay>
+            <source src="" type="">
+          </audio>
         <img id="homescreen-image" src="" alt="homescreen">
     </div>
     <script src="./lib/jquery/jquery-3.7.1.min.js"></script>

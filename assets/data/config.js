@@ -2,9 +2,14 @@ data =
     '{' +
         '"image-folder": "./assets/img/",' +
         '"video-folder": "./assets/videos/",' +
+        '"audio-folder": "./assets/audios/",' +
         '"image-home": "home.png",' +
         '"title": "Título del documento",' +
         '"back-button": "BACK",' +
+        '"bottom-menu": {' +
+            '"guide-button": "Tour Guide",' +
+            '"pause-guide-button": "Pause Guide"' +
+        '},' +
         '"buildings":[' +
             '{' +
                 '"element-name":"building1",' +
@@ -95,9 +100,9 @@ data =
             '{' +
                 '"page-number":1,' +
                 '"page-number-previous":0,' +
-                '"page-number-next":2,' +
                 '"page-building":"home",' +
                 '"page-img":"home.png",' +
+                '"page-audio":"InitialHome.wav",' +
                 '"page-name":"HomePage",' +
                 '"page-title":"Welcome to the connected city of the future.",' +
                 '"page-description":[' +
@@ -135,156 +140,62 @@ data =
             '{' +
                 '"page-number":2,' +
                 '"page-number-previous":1,' +
-                '"page-number-next":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
+                '"page-audio":"ConventionCenter_Building.wav",' +
                 '"page-name":"Convention Center",' +
-                '"page-title":"Convention Center.",' +
+                '"page-title":"WirelessMulti-Carrier Connectivity",' +
                 '"page-transition":"from_convention_center.gif",' +
-                '"page-description":[' +
-                    '{"0":"Convention Centers of the future enhance the patron experience and provide quicker, simpler access to services and amenities."},' +
-                    '{"1":"Select a demo to learn more."}' +
-                '],' +
+                '"page-description":[],' +
                 '"menu-items": [' +
                     '{' +
-                        '"item-name": "WirelessMulti-Carrier Connectivity",' +
+                        '"item-name": "Verizon\'s Neutral Host Network",' +
+                        '"page-number-next":2' +                
+                    '},' + 
+                    '{' +
+                        '"item-name": "Private Wireless Solution",' +
+                        '"page-number-next":2' +           
+                    '}' +  
+                '],' +
+                '"page-title-problem":"The Problem with Legacy Convention Centers",' +
+                '"page-description-problem":[],' +
+                '"menu-items-problem": [' +
+                    '{' +
+                        '"item-name": "Spotty Coverage",' +
                         '"page-number-next":3' +                
                     '},' + 
                     '{' +
-                        '"item-name": "Cashierless Checkout",' +
-                        '"page-number-next":3' +
-                    '},' +
+                        '"item-name": "Dropped Calls",' +
+                        '"page-number-next":2' +           
+                    '},' + 
                     '{' +
-                        '"item-name": "Accelerated Access",' +
-                        '"page-number-next":3' +           
-                    '}' +  
+                        '"item-name": "Limited Data Access",' +
+                        '"page-number-next":2' +           
+                    '},' +  
+                    '{' +
+                        '"item-name": "Device Latency",' +
+                        '"page-number-next":2' +           
+                    '},' +  
+                    '{' +
+                        '"item-name": "Reduced Security",' +
+                        '"page-number-next":2' +           
+                    '}' +   
                 ']' +
             '},' +
             '{' +
                 '"page-number":3,' +
                 '"page-number-previous":2,' +
-                '"page-number-next":4,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.png",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"WirelessMulti-Carrier Connectivity.",' +
-                '"page-description":[' +
-                    '{"0":"None"}' +
-                '],' +
-                '"menu-items": [' +
-                    '{' +
-                        '"item-name": "The Problem with Spotty Coverage",' +
-                        '"page-number-next":4' +                
-                    '},' + 
-                    '{' +
-                        '"item-name": "Verizon\'s Neutral Host Network",' +
-                        '"page-number-next":6' +
-                    '},' +
-                    '{' +
-                        '"item-name": "Private Wireless Solution",' +
-                        '"page-number-next":8' +           
-                    '}' +  
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":4,' +
-                '"page-number-previous":3,' +
-                '"page-number-next":5,' +
-                '"page-building":"building1",' +
-                '"page-img":"convention_center.png",' +
+                '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"The Problem with Spotty Coverage",' +
                 '"page-description":[' +
-                    '{"0":"Convention centers of the past were known for spotty connectivity, dropped calls, limited data access, and latency."}' +
+                    '{"0":"Convention centers of the past were knows for spotty connectivity, dropped calls, ilimited data access, and latency."}' +
                 '],' +
-                '"menu-items": [' +
-                    '{' +
-                        '"item-name": "Click Here to Zoom in on the Problem",' +
-                        '"page-number-next":5' +                
-                    '}' + 
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":5,' +
-                '"page-number-previous":4,' +
-                '"page-number-next":-1,' +
-                '"page-building":"building1",' +
-                '"page-img":"spotty_coverage.mp4",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"None",' +
-                '"page-description":[' +
-                    '{"0":"None"}' +
-                '],' +
-                '"menu-items": [' +                    
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":6,' +
-                '"page-number-previous":3,' +
-                '"page-number-next":7,' +
-                '"page-building":"building1",' +
-                '"page-img":"convention_center.png",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"Verizon\'s Neutral Host Network with Private Wireless*",' +
-                '"page-description":[' +
-                    '{"0":"Ensures seamless universal access for atendees and exhibitors."},' +
-                    '{"1":"Enhances user experience and supports efficient business operation."},' +
-                    '{"2":"Sets a new standard for digital excellence in event spaces."}' +
-                '],' +
-                '"menu-items": [' +
-                    '{' +
-                        '"item-name": "Click Here to Zoom in on the Solution",' +
-                        '"page-number-next":7' +                
-                    '}' + 
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":7,' +
-                '"page-number-previous":6,' +
-                '"page-number-next":-1,' +
-                '"page-building":"building1",' +
-                '"page-img":"verizon_neutral_host.mp4",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"None",' +
-                '"page-description":[' +
-                    '{"0":"None"}' +
-                '],' +
-                '"menu-items": [' +                    
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":8,' +
-                '"page-number-previous":3,' +
-                '"page-number-next":9,' +
-                '"page-building":"building1",' +
-                '"page-img":"convention_center.png",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"Private Wireless Solution",' +
-                '"page-description":[' +
-                    '{"0":"Private connections for employees and venue devices."},' +
-                    '{"1":"Terminates on a private wireless core."},' +
-                    '{"2":"Sets a new standard for digital excellence in event spaces."},' +
-                    '{"3":"Fast, separate and secure network environment separate from publics carriers."}' +
-                '],' +
-                '"menu-items": [' +
-                    '{' +
-                        '"item-name": "A Look Into the Private Network Solutions",' +
-                        '"page-number-next":9' +                
-                    '}' + 
-                ']' +
-            '},' +
-            '{' +
-                '"page-number":9,' +
-                '"page-number-previous":8,' +
-                '"page-number-next":-1,' +
-                '"page-building":"building1",' +
-                '"page-img":"private_wireless_solution.mp4",' +
-                '"page-name":"Convention Center",' +
-                '"page-title":"None",' +
-                '"page-description":[' +
-                    '{"0":"None"}' +
-                '],' +
-                '"menu-items": []' +
+                '"menu-items": [],' +
+                '"page-title-problem":"None",' +
+                '"page-description-problem":[],' +
+                '"menu-items-problem": []' +
             '}' +
         ']' +
     '}'
