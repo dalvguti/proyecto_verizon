@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./lib/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" href="./assets/css/custom.css">
     <title>Name of document</title>
 </head>
@@ -11,59 +10,75 @@
     <div id="loading-animation" class="hidden-element">
         <div class="loader"></div>
     </div>
-    <div id="main-content">
-        <div id="countdown" class="hidden-element">
-            <div id="countdown-number"></div>
-            <svg>
-                <circle r="18" cx="20" cy="20"></circle>
-            </svg>
-        </div>
-        <div id="building-menu">
-            <div id="building-menu-problem" class="hidden-element">
-                <div id="building-menu-content-problem">
-                    <h3 id="building-menu-title-problem"></h3>
-                    <div id="building-menu-description-problem"></div>
-                </div>
-                <div id="building-menu-items-problem"></div>
-            </div>
-            <p style="margin: 0;">&nbsp;</p>
-            <div id="building-menu-main" class="hidden-element">
-                <div id="building-menu-content">
-                    <h3 id="building-menu-title"></h3>
-                    <div id="building-menu-description"></div>
-                </div>
-                <div id="building-menu-items"></div>
-            </div>            
-        </div>
-        <div id="building1" class="building-select"><div class="building-label"></div></div>
-        <div id="building2" class="building-select"><div class="building-label"></div></div>
-        <div id="building3" class="building-select"><div class="building-label"></div></div>
-        <div id="building4" class="building-select"><div class="building-label"></div></div>
-        <div id="building5" class="building-select"><div class="building-label"></div></div>
-        <div id="building6" class="building-select"><div class="building-label"></div></div>
-        <button id="back-button"></button>
-        <nav id="bottom-menu">
-            <a id="audio-button" state="off"></a>
-            <a id="bar-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
+    <div id="content">
+        <div id="main-content">
+            <div id="countdown" class="hidden-element">
+                <div id="countdown-number"></div>
+                <svg>
+                    <circle r="18" cx="20" cy="20"></circle>
                 </svg>
-            </a>
-            <a id="guide-button"></a>
-            <a id="caption-button">CC</a>
-        </nav>
-        <video id="homescreen-video" class="hidden-element" width="100%" autoplay loop>
-            <source src="" type="">
-        </video>
-        <audio id="homescreen-audio" class="hidden-element" autoplay>
-            <source src="" type="">
-          </audio>
-        <img id="homescreen-image" src="" alt="homescreen">
+            </div>
+            <div id="building-menu">
+                <div id="building-menu-problem" class="hidden-element">
+                    <div id="building-menu-content-problem">
+                        <h3 id="building-menu-title-problem"></h3>
+                        <div id="building-menu-description-problem"></div>
+                    </div>
+                    <div id="building-menu-items-problem"></div>
+                </div>
+                <p style="margin: 0;">&nbsp;</p>
+                <div id="building-menu-main" class="hidden-element">
+                    <div id="building-menu-content">
+                        <h3 id="building-menu-title"></h3>
+                        <div id="building-menu-description"></div>
+                    </div>
+                    <div id="building-menu-items"></div>
+                </div>            
+            </div>
+            <div id="building1" class="building-select"><div class="building-label"></div></div>
+            <div id="building2" class="building-select"><div class="building-label"></div></div>
+            <div id="building3" class="building-select"><div class="building-label"></div></div>
+            <div id="building4" class="building-select"><div class="building-label"></div></div>
+            <div id="building5" class="building-select"><div class="building-label"></div></div>
+            <div id="building6" class="building-select"><div class="building-label"></div></div>
+            <button id="back-button"></button>
+            <nav id="bottom-menu">
+                <a id="audio-button" state="off"></a>
+                <a id="bar-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </a>
+                <a id="guide-button"></a>
+                <a id="caption-button" state="off">CC</a>
+            </nav>
+            <video id="homescreen-video" class="hidden-element" width="100%" autoplay loop>
+                <source src="" type="">
+                <track
+                    label="English"
+                    kind="subtitles"
+                    srclang="en"
+                    src=""
+                    default 
+                />
+            </video>
+            <audio id="homescreen-audio" class="hidden-element" autoplay>
+                <source src="" type="">
+                <track
+                    label="English"
+                    kind="subtitles"
+                    srclang="en"
+                    src=""
+                    default 
+                />
+            </audio>
+            <div id="subtitle-content" class="hidden-element"><p id="subtitle-display"></p></div>
+            <img id="homescreen-image" src="" alt="homescreen">
+        </div>
     </div>
     <script src="./lib/jquery/jquery-3.7.1.min.js"></script>
-    <script src="./lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="./assets/data/config.js"></script>
     <script src="./assets/js/custom.js"></script>
     <script>

@@ -1,17 +1,22 @@
 html, body {
   width: 100%;
   height: 100%;
-  margin: 0;
+  margin: 0; 
+}
+
+#content {
+  width: 100%;
+  height: 100%;  
+  min-width: 1024px;
   display: flex;
-  align-items: center;
+  align-items: center;  
   justify-content: center;
 }
 
 #main-content {
   width: auto;
-  /*margin: 100px auto;*/
-  position: relative; 
-  overflow: hidden;
+  min-width: 1024px;
+  position: relative;   
 }
 
 #back-button {
@@ -23,7 +28,7 @@ html, body {
   opacity: 0.8;
   background-color: black;
   padding: 5px 20px 5px 20px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .building-select {
@@ -83,7 +88,7 @@ html, body {
 #building-menu {
     font-family: Georgia, serif;
     padding: 5px;
-    z-index: 100;
+    z-index: 1;
     position: absolute;
     right: 2%;
     width: 450px;
@@ -135,7 +140,7 @@ html, body {
 }
 
 #homescreen-image, #homescreen-video {
-  width: auto;
+  width: 100%;
 }
 
 #bottom-menu {
@@ -146,7 +151,7 @@ html, body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  z-index: 1;
+  z-index: 3;
 }
 
 #bottom-menu a {
@@ -170,6 +175,25 @@ html, body {
 #bar-button {
   display: flex;
   align-items: center;
+}
+
+#subtitle-content {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+#subtitle-content p {
+  width: 35%;
+  text-align: center;
+  background-color: black;
+  opacity: 0.8;
+  color: #fff;
+  font-size: 1em;
+  padding: 10px;
 }
 
 @media (min-width: 1024px) {

@@ -1,6 +1,7 @@
 let imageFolder = "";
 let videoFolder = "";
 let audioFolder = "";
+let subtitleFolder = "";
 let imageWidth = "";
 let imageHeight = "";
 let loadingImage = false;
@@ -25,6 +26,7 @@ function initialize() {
     imageFolder = mydata['image-folder'];
     videoFolder = mydata['video-folder'];
     audioFolder = mydata['audio-folder'];
+    subtitleFolder = mydata['subtitle-folder'];
     document.title = mydata['title'];
     $("#guide-button").html(mydata['bottom-menu']['guide-button']);
     $("#guide-button").attr('pause-guide-button', mydata['bottom-menu']['pause-guide-button']);
@@ -41,21 +43,61 @@ function initialize() {
         if ($(this).attr('state') == 'off') {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_on.png)')
             $("#audio-button").attr('state', 'on');
-            $("#homescreen-audio")[0].play();
+            if ($("#homescreen-audio source").attr('src') != '') {
+                $("#homescreen-audio")[0].play();
+            }
+            if ($("#homescreen-video source").attr('src') != '') {
+                $("#homescreen-video").prop('muted', false);
+            }            
         }else {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_off.png)')
             $("#audio-button").attr('state', 'off');
             if ($("#homescreen-audio source").attr('src') != '') {
                 $("#homescreen-audio")[0].pause();
-                //$("#homescreen-audio")[0].currentTime = 0;            
+                $("#homescreen-audio")[0].currentTime = 0;            
+            }
+            if ($("#homescreen-video source").attr('src') != '') {
+                $("#homescreen-video").prop('muted', true);
             }
         }
     });
+    $("#caption-button").on('click', function(){
+        var name_element_subtitles = '';
+        if ($("#homescreen-audio track").attr('src') != '') {
+            name_element_subtitles = 'homescreen-audio';
+        } else if ($("#homescreen-video track").attr('src') != '') {
+            name_element_subtitles = 'homescreen-video';
+        }
+        if ($(this).attr('state') == 'off') {
+            $(this).css('background-color', '#333');
+            $(this).css('color', '#FFF');
+            $(this).attr('state', 'on');            
+            if (name_element_subtitles != '') {
+                $("#subtitle-content").removeClass('hidden-element');
+            } else {
+                $("#subtitle-content").addClass('hidden-element');
+            }                        
+        }else {
+            $(this).css('background-color', '');
+            $(this).css('color', '');
+            $(this).attr('state', 'off');
+            $("#subtitle-content").addClass('hidden-element');        
+        }
+    });
+    
 }
 
 function calculate_building_position() {    
-    $('#homescreen-image').attr('style', 'max-height:'+(document.body.offsetHeight * 0.99)+'px');
-    $('#homescreen-video').attr('style', 'max-height:'+(document.body.offsetHeight * 0.99)+'px');
+    imageWidth = getComputedStyle(document.getElementById("homescreen-image")).width.replace('px','');
+    if (imageWidth > 1024) {
+        $('#homescreen-image').css('max-height', (document.body.offsetHeight * 0.99)+'px');
+        $('#homescreen-video').css('max-height', (document.body.offsetHeight * 0.99)+'px');
+        $('#main-content').css('overflow', 'hidden');
+    } else {
+        $('#homescreen-image').css('max-height', '');
+        $('#homescreen-video').css('max-height', '');
+        $('#main-content').css('overflow', 'visible');
+    }
     var mydata = JSON.parse(data)['buildings'];
     $(mydata).each(function(){
         var elementName = this['element-name'];
@@ -65,7 +107,7 @@ function calculate_building_position() {
         document.getElementById(elementName).style.left = this['left'];
         document.getElementById(elementName).style.transform = "rotate("+this['transform']+"deg)";
         $("#"+elementName).attr('next_page', this['page-number']);
-        $("#"+elementName).attr('transition_img', this['transition']);
+        $("#"+elementName).attr('transition', this['transition']);
         $("#"+elementName+' .building-label').html('');
         $("#"+elementName+' .building-label').append('<p>'+this['name']+'</p>').append('<div class="'+this['class-name']+'"></div>');
         $("#"+elementName+' .building-label').css('top', this['name-top']);
@@ -74,10 +116,10 @@ function calculate_building_position() {
         $("#"+elementName).unbind('click');
         document.getElementById(elementName).addEventListener("click", function(e){
             var timeTransition = 0;
-            if ($("#"+e.target.id).attr("transition_img") != 'none.gif'){
+            if ($("#"+e.target.id).attr("transition") != 'none.gif'){
                 timeTransition = 1700;
                 hide_building_names();
-                $("#homescreen-image").attr('src', imageFolder + $("#"+e.target.id).attr("transition_img")); 
+                executeTransition($("#"+e.target.id).attr("transition"));                
             }
             setTimeout(function(){
                 build_page($("#"+e.target.id).attr("next_page"));
@@ -96,7 +138,16 @@ function build_page(page_number) {
     $("#building-menu-items-problem").html('');
     $("#building-menu-title-problem").html(''); 
     $("#building-menu-description-problem").html('');
+    $("#homescreen-audio source").attr('src', '');
+    $("#homescreen-audio source").attr('type', '');
+    $("#homescreen-audio track").attr('src', '');
+    $("#homescreen-audio")[0].load();
+    $("#homescreen-video source").attr('src', '');
+    $("#homescreen-video source").attr('type', '');
+    $("#homescreen-video track").attr('src', '');
+    document.getElementById('homescreen-video').load();
     $('#back-button').unbind('click');
+    $("#subtitle-content").addClass('hidden-element');
     $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
             /* MAIN CONTENT START*/
@@ -157,8 +208,7 @@ function build_page(page_number) {
             }
             /* PROBLEM CONTENT END*/            
             
-            if (allowedImages.includes(getExtension(this['page-img']))) {
-                loadingImage = true;
+            if (!isVideo(this['page-img'])) {
                 $("#homescreen-image").removeClass('hidden-element');
                 $("#homescreen-video").addClass('hidden-element');
                 $("#homescreen-image").attr('src', imageFolder + this['page-img']);
@@ -167,24 +217,58 @@ function build_page(page_number) {
                 $("#homescreen-video").removeClass('hidden-element');
                 $("#homescreen-video source").attr('src', videoFolder+this['page-img']);
                 $("#homescreen-video source").attr('type', 'video/'+getExtension(this['page-img']).replace('.',''));
-                $("#homescreen-video")[0].load();
-                $("#homescreen-video")[0].play();
+                if (this['page-subtitles'] != undefined) {
+                    if (this['page-subtitles']['type'] == 'video') {
+                        $("#homescreen-video track").attr('src', subtitleFolder+this['page-subtitles']['file']);
+                        document.getElementById("homescreen-video").textTracks[0].mode = 'hidden';
+                        $("#homescreen-audio track").attr('src', '');
+                    }  
+                    document.getElementById('homescreen-video').textTracks[0].removeEventListener('cuechange', function() {
+                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                    });
+                    document.getElementById('homescreen-video').textTracks[0].addEventListener('cuechange', function() {
+                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                    });
+                    if ($("#caption-button").attr('state') == 'on')
+                        $("#subtitle-content").removeClass('hidden-element');
+                    else
+                        $("#subtitle-content").addClass('hidden-element');                  
+                }
+                document.getElementById("homescreen-video").load();
+                if ($("#audio-button").attr('state') === 'on') {
+                    $("#homescreen-video").prop('muted', false);
+                }else {
+                    $("#homescreen-video").prop('muted', true);
+                }  
+                document.getElementById("homescreen-video").play();
             }
             if (this['page-audio'] != undefined) {
                 $("#homescreen-audio source").attr('src', audioFolder+this['page-audio']);
                 $("#homescreen-audio source").attr('type', 'audio/'+getExtension(this['page-audio']).replace('.',''));
+                if (this['page-subtitles'] != undefined) {
+                    if (this['page-subtitles']['type'] == 'audio') {
+                        $("#homescreen-audio track").attr('src', subtitleFolder+this['page-subtitles']['file']);
+                        $("#homescreen-video track").attr('src', '');
+                        document.getElementById('homescreen-audio').textTracks[0].removeEventListener('cuechange', function() {
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                        });
+                        document.getElementById('homescreen-audio').textTracks[0].addEventListener('cuechange', function() {
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                        });
+                    }
+                    if ($("#caption-button").attr('state') == 'on')
+                        $("#subtitle-content").removeClass('hidden-element');
+                    else
+                        $("#subtitle-content").addClass('hidden-element');                    
+                }
                 $("#homescreen-audio")[0].load();
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#homescreen-audio")[0].play();
                 }else {
                     $("#homescreen-audio")[0].pause();
                     $("#homescreen-audio")[0].currentTime = 0;
-                }
-            } else {
-                $("#homescreen-audio source").attr('src', '');
-                $("#homescreen-audio source").attr('type', '');
-                $("#homescreen-audio")[0].load();
-            }
+                }                
+            } 
             var page_number_previous = this['page-number-previous'];
             if (this['page-transition'] != undefined)
                 $("#back-button").attr('page-transition', this['page-transition']);
@@ -195,7 +279,7 @@ function build_page(page_number) {
                 if ($("#back-button").attr('page-transition') != undefined){
                     timeTransition = 1700;
                     hide_building_names();
-                    $("#homescreen-image").attr('src', imageFolder + $("#back-button").attr('page-transition'));
+                    executeTransition($("#back-button").attr('page-transition'));                    
                 }
                 setTimeout(function(){
                     build_page(page_number_previous);
@@ -231,4 +315,21 @@ function countdown(seconds) {
 
 function isLoadingImage(){
     return loadingImage;
+}
+
+function isVideo(filename) {
+    return !allowedImages.includes(getExtension(filename));
+}
+
+function executeTransition(filename) {
+    $("#homescreen-image").addClass('hidden-element');
+    $("#homescreen-video").addClass('hidden-element');
+    if (isVideo(filename)) {
+        $("#homescreen-video source").attr('src', videoFolder + filename);
+        document.getElementById('homescreen-video').load();
+        $("#homescreen-video").removeClass('hidden-element');
+    } else {
+        $("#homescreen-image").attr('src', imageFolder + filename);
+        $("#homescreen-image").removeClass('hidden-element');
+    }
 }

@@ -3,6 +3,7 @@ data =
         '"image-folder": "./assets/img/",' +
         '"video-folder": "./assets/videos/",' +
         '"audio-folder": "./assets/audios/",' +
+        '"subtitle-folder": "./assets/subtitles/",' +
         '"image-home": "home.png",' +
         '"title": "Título del documento",' +
         '"back-button": "BACK",' +
@@ -14,7 +15,7 @@ data =
             '{' +
                 '"element-name":"building1",' +
                 '"page-number":2,' +
-                '"transition": "to_convention_center.gif",' +
+                '"transition": "to_convention_center.mp4",' +
                 '"name":"Convention Center",' +
                 '"name-top":"10%",' +
                 '"name-left":"35%",' +
@@ -30,10 +31,10 @@ data =
                 '"page-number":1,' +
                 '"transition": "none.gif",' +
                 '"name":"Corporate Office",' +
-                '"name-top":"100%",' +
+                '"name-top":"90%",' +
                 '"name-left":"40%",' +
                 '"class-name":"building-label-top-right",' +
-                '"top":"2%",' +
+                '"top":"8%",' +
                 '"left":"33%",' +
                 '"transform":0,' +
                 '"height":"(1.5*(imageWidth/10))",' +
@@ -76,7 +77,7 @@ data =
                 '"name-left":"50%",' +
                 '"class-name":"building-label-bottom-right",' +
                 '"top":"65%",' +
-                '"left":"24%",' +
+                '"left":"28%",' +
                 '"transform":-30,' +
                 '"height":"(1.2*(imageWidth/10))",' +
                 '"width":"(2.5*(imageWidth/10))"' +               
@@ -103,6 +104,10 @@ data =
                 '"page-building":"home",' +
                 '"page-img":"home.png",' +
                 '"page-audio":"InitialHome.wav",' +
+                '"page-subtitles":{' +
+                    '"type":"audio",' +
+                    '"file":"InitialHome.vtt"' +
+                '},' +
                 '"page-name":"HomePage",' +
                 '"page-title":"Welcome to the connected city of the future.",' +
                 '"page-description":[' +
@@ -143,9 +148,13 @@ data =
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
                 '"page-audio":"ConventionCenter_Building.wav",' +
+                '"page-subtitles":{' +
+                    '"type":"audio",' +
+                    '"file":"ConventionCenter_Building.vtt"' +
+                '},' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"WirelessMulti-Carrier Connectivity",' +
-                '"page-transition":"from_convention_center.gif",' +
+                '"page-transition":"from_convention_center.mp4",' +
                 '"page-description":[],' +
                 '"menu-items": [' +
                     '{' +
