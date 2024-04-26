@@ -130,33 +130,17 @@ function calculate_building_position() {
 
 function build_page(page_number) {
     var mydata = JSON.parse(data);
-    var imageHome = mydata['image-home'];
-    hide_building_names(page_number != 1);
-    $("#building-menu-items").html('');
-    $("#building-menu-title").html(''); 
-    $("#building-menu-description").html('');
-    $("#building-menu-items-problem").html('');
-    $("#building-menu-title-problem").html(''); 
-    $("#building-menu-description-problem").html('');
-    $("#homescreen-audio source").attr('src', '');
-    $("#homescreen-audio source").attr('type', '');
-    $("#homescreen-audio track").attr('src', '');
-    $("#homescreen-audio")[0].load();
-    $("#homescreen-video source").attr('src', '');
-    $("#homescreen-video source").attr('type', '');
-    $("#homescreen-video track").attr('src', '');
-    document.getElementById('homescreen-video').load();
-    $('#back-button').unbind('click');
-    $("#subtitle-content").addClass('hidden-element');
+    var imageHome = mydata['image-home'];    
     $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
+            clearElements();
             /* MAIN CONTENT START*/
             if (this['page-title'] != "None")
                 $("#building-menu-title").html(this['page-title']);
             $(this['menu-items']).each(function(){
-                new_ele = $("<a item-image='"+this['item-image']+"'>"+this['item-name']+"</a>");
-                $("#building-menu-items").append(new_ele); 
                 var page_number_next = this['page-number-next'];
+                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+page_number_next+"'>"+this['item-name']+"</a>");
+                $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
                         $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
@@ -189,9 +173,9 @@ function build_page(page_number) {
                 $("#building-menu-title-problem").html(this['page-title-problem']);
 
             $(this['menu-items-problem']).each(function(){
-                new_ele = $("<a item-image='"+this['item-image']+"'>"+this['item-name']+"</a>");
-                $("#building-menu-items-problem").append(new_ele); 
                 var page_number_next = this['page-number-next'];
+                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+page_number_next+"'>"+this['item-name']+"</a>");
+                $("#building-menu-items-problem").append(new_ele); 
                 new_ele.on('click',function() {
                     build_page(page_number_next);
                 });                  
@@ -223,18 +207,18 @@ function build_page(page_number) {
                         document.getElementById("homescreen-video").textTracks[0].mode = 'hidden';
                         $("#homescreen-audio track").attr('src', '');
                     }  
-                    document.getElementById('homescreen-video').textTracks[0].removeEventListener('cuechange', function() {
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
-                    });
-                    document.getElementById('homescreen-video').textTracks[0].addEventListener('cuechange', function() {
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
-                    });
                     if ($("#caption-button").attr('state') == 'on')
                         $("#subtitle-content").removeClass('hidden-element');
                     else
                         $("#subtitle-content").addClass('hidden-element');                  
                 }
                 document.getElementById("homescreen-video").load();
+                document.getElementById('homescreen-video').textTracks[0].removeEventListener('cuechange', function() {
+                    document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                });
+                document.getElementById('homescreen-video').textTracks[0].addEventListener('cuechange', function() {
+                    document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                });
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#homescreen-video").prop('muted', false);
                 }else {
@@ -249,12 +233,6 @@ function build_page(page_number) {
                     if (this['page-subtitles']['type'] == 'audio') {
                         $("#homescreen-audio track").attr('src', subtitleFolder+this['page-subtitles']['file']);
                         $("#homescreen-video track").attr('src', '');
-                        document.getElementById('homescreen-audio').textTracks[0].removeEventListener('cuechange', function() {
-                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
-                        });
-                        document.getElementById('homescreen-audio').textTracks[0].addEventListener('cuechange', function() {
-                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
-                        });
                     }
                     if ($("#caption-button").attr('state') == 'on')
                         $("#subtitle-content").removeClass('hidden-element');
@@ -262,6 +240,12 @@ function build_page(page_number) {
                         $("#subtitle-content").addClass('hidden-element');                    
                 }
                 $("#homescreen-audio")[0].load();
+                document.getElementById('homescreen-audio').textTracks[0].removeEventListener('cuechange', function() {
+                    document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                });
+                document.getElementById('homescreen-audio').textTracks[0].addEventListener('cuechange', function() {
+                    document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                
+                });
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#homescreen-audio")[0].play();
                 }else {
@@ -332,4 +316,23 @@ function executeTransition(filename) {
         $("#homescreen-image").attr('src', imageFolder + filename);
         $("#homescreen-image").removeClass('hidden-element');
     }
+}
+
+function clearElements() {
+    $("#building-menu-items").html('');
+    $("#building-menu-title").html(''); 
+    $("#building-menu-description").html('');
+    $("#building-menu-items-problem").html('');
+    $("#building-menu-title-problem").html(''); 
+    $("#building-menu-description-problem").html('');
+    $("#homescreen-audio source").attr('src', '');
+    $("#homescreen-audio source").attr('type', '');
+    $("#homescreen-audio track").attr('src', '');
+    $("#homescreen-audio")[0].load();
+    $("#homescreen-video source").attr('src', '');
+    $("#homescreen-video source").attr('type', '');
+    $("#homescreen-video track").attr('src', '');
+    document.getElementById('homescreen-video').load();
+    $('#back-button').unbind('click');
+    $("#subtitle-content").addClass('hidden-element');
 }
