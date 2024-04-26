@@ -100,6 +100,7 @@ data =
         '"pages":[' +
             '{' +
                 '"page-number":1,' +
+                '"page-number-next":2,' +
                 '"page-number-previous":0,' +
                 '"page-building":"home",' +
                 '"page-img":"home.png",' +
@@ -144,6 +145,7 @@ data =
             '},' +
             '{' +
                 '"page-number":2,' +
+                '"page-number-next":3,' +
                 '"page-number-previous":1,' +
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
@@ -153,17 +155,47 @@ data =
                     '"file":"ConventionCenter_Building.vtt"' +
                 '},' +
                 '"page-name":"Convention Center",' +
-                '"page-title":"WirelessMulti-Carrier Connectivity",' +
+                '"page-title":"Convention Center home screen",' +
                 '"page-transition":"from_convention_center.mp4",' +
+                '"page-description":[' +
+                    '{"0":"Convention centers of the future enhance connectivity and provide quicker, simpler access to services and amenities."},' +
+                    '{"1":"Select a demo to learn more."}' +
+                '],' +
+                '"menu-items": [' +
+                    '{' +
+                        '"item-name": "Wireless Mutli-Carrier Connectivity",' +
+                        '"page-number-next":3' +                
+                    '},' + 
+                    '{' +
+                        '"item-name": "Cashierless Checkout",' +
+                        '"page-number-next":0' +           
+                    '},' +  
+                    '{' +
+                        '"item-name": "Accelerated Access",' +
+                        '"page-number-next":0' +           
+                    '}' + 
+                '],' +
+                '"page-title-problem":"None",' +
+                '"page-description-problem":[],' +
+                '"menu-items-problem": []' +
+            '},' +
+            '{' +
+                '"page-number":3,' +
+                '"page-number-next":4,' +
+                '"page-number-previous":2,' +
+                '"page-building":"building1",' +
+                '"page-img":"convention_center.png",' +
+                '"page-name":"Convention Center",' +
+                '"page-title":"WirelessMulti-Carrier Connectivity",' +
                 '"page-description":[],' +
                 '"menu-items": [' +
                     '{' +
                         '"item-name": "Verizon\'s Neutral Host Network",' +
-                        '"page-number-next":8' +                
+                        '"page-number-next":9' +                
                     '},' + 
                     '{' +
                         '"item-name": "Private Wireless Solution",' +
-                        '"page-number-next":9' +           
+                        '"page-number-next":10' +           
                     '}' +  
                 '],' +
                 '"page-title-problem":"The Problem with Legacy Convention Centers",' +
@@ -171,29 +203,30 @@ data =
                 '"menu-items-problem": [' +
                     '{' +
                         '"item-name": "Spotty Coverage",' +
-                        '"page-number-next":3' +                
+                        '"page-number-next":4' +                
                     '},' + 
                     '{' +
                         '"item-name": "Dropped Calls",' +
-                        '"page-number-next":4' +           
+                        '"page-number-next":5' +           
                     '},' + 
                     '{' +
                         '"item-name": "Limited Data Access",' +
-                        '"page-number-next":5' +           
-                    '},' +  
-                    '{' +
-                        '"item-name": "Device Latency",' +
                         '"page-number-next":6' +           
                     '},' +  
                     '{' +
-                        '"item-name": "Reduced Security",' +
+                        '"item-name": "Device Latency",' +
                         '"page-number-next":7' +           
+                    '},' +  
+                    '{' +
+                        '"item-name": "Reduced Security",' +
+                        '"page-number-next":8' +           
                     '}' +   
                 ']' +
             '},' +
             '{' +
-                '"page-number":3,' +
-                '"page-number-previous":2,' +
+                '"page-number":4,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
@@ -207,8 +240,9 @@ data =
                 '"menu-items-problem": []' +
             '},' +
             '{' +
-                '"page-number":4,' +
-                '"page-number-previous":2,' +
+                '"page-number":5,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
@@ -221,8 +255,9 @@ data =
                 '"menu-items-problem": []' +
             '},' +
             '{' +
-                '"page-number":5,' +
-                '"page-number-previous":2,' +
+                '"page-number":6,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
@@ -235,8 +270,9 @@ data =
                 '"menu-items-problem": []' +
             '},' +
             '{' +
-                '"page-number":6,' +
-                '"page-number-previous":2,' +
+                '"page-number":7,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
@@ -249,8 +285,9 @@ data =
                 '"menu-items-problem": []' +
             '},' +
             '{' +
-                '"page-number":7,' +
-                '"page-number-previous":2,' +
+                '"page-number":8,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"SpottyConnectivity_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
@@ -263,8 +300,9 @@ data =
                 '"menu-items-problem": []' +
             '},' +
             '{' +
-                '"page-number":8,' +
-                '"page-number-previous":2,' +
+                '"page-number":9,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
                 '"page-audio":"VerizonNeutralHost.ogg",' +
@@ -291,8 +329,9 @@ data =
                 ']' +
             '},' +
             '{' +
-                '"page-number":9,' +
-                '"page-number-previous":2,' +
+                '"page-number":10,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":3,' +
                 '"page-building":"building1",' +
                 '"page-img":"convention_center.png",' +
                 '"page-audio":"PrivateNetwork.ogg",' +
@@ -319,4 +358,121 @@ data =
                 ']' +
             '}' +
         ']' +
-    '}'
+    '}';
+
+guided_tour = 
+    '[' +
+        '{' +
+            '"step": 0,' +       
+            '"time": 3,' +     
+            '"page_number": 1,' +
+            '"next_page": 2,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 1,' +       
+            '"time": 5,' +     
+            '"page_number": 2,' +
+            '"next_page": 3,' +
+            '"state": false,' +
+            '"building": "building1"' +
+        '},' +
+        '{' +
+            '"step": 2,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 4,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 3,' +       
+            '"time": 3,' +     
+            '"page_number": 4,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 4,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 5,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 5,' +       
+            '"time": 3,' +     
+            '"page_number": 5,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 6,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 6,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 7,' +       
+            '"time": 3,' +     
+            '"page_number": 6,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 8,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 7,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 9,' +       
+            '"time": 3,' +     
+            '"page_number": 7,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 10,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 8,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 11,' +       
+            '"time": 3,' +     
+            '"page_number": 8,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 12,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 9,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 13,' +       
+            '"time": 3,' +     
+            '"page_number": 9,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 14,' +       
+            '"time": 3,' +     
+            '"page_number": 3,' +
+            '"next_page": 10,' +
+            '"state": false' +
+        '},' +
+        '{' +
+            '"step": 15,' +       
+            '"time": 3,' +     
+            '"page_number": 10,' +
+            '"next_page": 0,' +
+            '"state": false' +
+        '}' +
+    ']';

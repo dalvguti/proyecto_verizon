@@ -7,6 +7,9 @@ let imageHeight = "";
 let loadingImage = false;
 let pageNumber = 1;
 let intervalId = null;
+let guidedTour = JSON.parse(guided_tour);
+let currentStep = -1;
+let guidedTourFlag = false;
 const allowedImages = ['.jpg', '.png', '.gif'];
 const getExtension = str => str.slice(str.lastIndexOf("."));
 let loadPromise = new Promise(function(resolve, reject) {
@@ -84,7 +87,31 @@ function initialize() {
             $("#subtitle-content").addClass('hidden-element');        
         }
     });
-    
+    $("#guide-button").on('click', function(){
+        if ($(this).attr('state') == 'off') {
+            $(this).css('background-color', '#333');
+            $(this).css('color', '#FFF');
+            $(this).attr('state', 'on');
+            $("#back-button").addClass('hidden-element');
+            $("#building-menu-overlay").removeClass('hidden-element');
+            guidedTourFlag = true;
+        } else {
+            $(this).css('background-color', '');
+            $(this).css('color', '');
+            $(this).attr('state', 'off');
+            if (currentStep != 0)
+                $("#back-button").removeClass('hidden-element');
+            $("#building-menu-overlay").addClass('hidden-element');
+            guidedTourFlag = false;
+        }
+        if (guidedTourFlag) {
+            runGuidedTour();
+            if (currentStep > guidedTour.length-1) {
+                $("#guide-button").trigger("click");
+                build_page(1);
+            }                
+        }            
+    });
 }
 
 function calculate_building_position() {    
@@ -133,13 +160,15 @@ function build_page(page_number) {
     var imageHome = mydata['image-home'];    
     $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
+            if (!guidedTourFlag)
+                updateGuidedTourStep(page_number, this['page-number-next']);
+            hide_building_names(page_number != 1);
             clearElements();
             /* MAIN CONTENT START*/
             if (this['page-title'] != "None")
                 $("#building-menu-title").html(this['page-title']);
             $(this['menu-items']).each(function(){
-                var page_number_next = this['page-number-next'];
-                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+page_number_next+"'>"+this['item-name']+"</a>");
+                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"'>"+this['item-name']+"</a>");
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
@@ -153,7 +182,7 @@ function build_page(page_number) {
                     });                    
                 } else {
                     new_ele.on('click',function() {
-                        build_page(page_number_next);
+                        build_page($(this).attr('next-page'));
                     });                    
                 }                
             });
@@ -173,11 +202,10 @@ function build_page(page_number) {
                 $("#building-menu-title-problem").html(this['page-title-problem']);
 
             $(this['menu-items-problem']).each(function(){
-                var page_number_next = this['page-number-next'];
-                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+page_number_next+"'>"+this['item-name']+"</a>");
+                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"'>"+this['item-name']+"</a>");
                 $("#building-menu-items-problem").append(new_ele); 
                 new_ele.on('click',function() {
-                    build_page(page_number_next);
+                    build_page($(this).attr('next-page'));
                 });                  
             });
 
@@ -259,6 +287,8 @@ function build_page(page_number) {
             else
                 $("#back-button").removeAttr('page-transition');
             $('#back-button').on('click', function(){
+                if (guidedTourFlag) 
+                    return;
                 var timeTransition = 0;
                 if ($("#back-button").attr('page-transition') != undefined){
                     timeTransition = 1700;
@@ -268,7 +298,7 @@ function build_page(page_number) {
                 setTimeout(function(){
                     build_page(page_number_previous);
                 }, timeTransition);                
-            });            
+            });    
             return
         }            
     });
@@ -335,4 +365,44 @@ function clearElements() {
     document.getElementById('homescreen-video').load();
     $('#back-button').unbind('click');
     $("#subtitle-content").addClass('hidden-element');
+}
+
+function resetGuidedTourStates() {
+    $(guidedTour).each(function(){
+        this['state'] = false;
+    });
+}
+
+function updateGuidedTourStep(page_number, next_page) {
+    resetGuidedTourStates();
+    $(guidedTour).each(function(){
+        if (parseInt(this['page_number']) == parseInt(page_number) && parseInt(this['next_page']) == parseInt(next_page))
+            currentStep = this['step'];
+    });
+    $(guidedTour).each(function(){
+        if (parseInt(this['step']) < parseInt(currentStep))
+            this['state'] = true;
+    });    
+}
+
+function runGuidedTour() {
+    if (currentStep >= guidedTour.length-1 || !guidedTourFlag)
+        return;
+    if (guidedTour[currentStep]['building'] != undefined){
+        countdown(guidedTour[currentStep]['time']);
+        $("#building1").trigger('click');
+    } else {
+        countdown(guidedTour[currentStep]['time']);
+        build_page(guidedTour[currentStep]['page_number']);
+    }
+    setTimeout(function(){
+        $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").css("background-color", "#333");        
+    }, 2000);
+    setTimeout(function(){
+        clearInterval(intervalId);
+        currentStep += 1;    
+        $("#countdown").addClass("hidden-element");
+        guidedTour[currentStep]['state'] = true;
+        runGuidedTour();    
+    }, parseInt(guidedTour[currentStep]['time']) * 1000);    
 }

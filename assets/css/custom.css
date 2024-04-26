@@ -139,6 +139,13 @@ html, body {
   margin: 5px 0 5px 0;
 }
 
+#building-menu-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 5;
+}
+
 #homescreen-image, #homescreen-video {
   width: 100%;
 }
