@@ -105,12 +105,23 @@ function initialize() {
             guidedTourFlag = false;
         }
         if (guidedTourFlag) {
-            runGuidedTour();
+            if ($("#audio-button").attr('state') == 'off')
+                $("#audio-button").trigger('click');
+            if ($("#caption-button").attr('state') == 'off')
+                $("#caption-button").trigger('click');
             if (currentStep > guidedTour.length-1) {
                 $("#guide-button").trigger("click");
+                resetGuidedTourStates();
                 build_page(1);
+            } else {
+                runGuidedTour();
             }                
-        }            
+        } else {
+            clearInterval(intervalId);
+            $("#countdown").addClass('hidden-element');
+            $("#building-menu-items a").removeClass('animated-item');
+            $("#building-menu-items-problem a").removeClass('animated-item');
+        }           
     });
 }
 
@@ -135,6 +146,7 @@ function calculate_building_position() {
         document.getElementById(elementName).style.transform = "rotate("+this['transform']+"deg)";
         $("#"+elementName).attr('next_page', this['page-number']);
         $("#"+elementName).attr('transition', this['transition']);
+        $("#"+elementName).attr('transition-time', this['transition-time']);
         $("#"+elementName+' .building-label').html('');
         $("#"+elementName+' .building-label').append('<p>'+this['name']+'</p>').append('<div class="'+this['class-name']+'"></div>');
         $("#"+elementName+' .building-label').css('top', this['name-top']);
@@ -144,7 +156,7 @@ function calculate_building_position() {
         document.getElementById(elementName).addEventListener("click", function(e){
             var timeTransition = 0;
             if ($("#"+e.target.id).attr("transition") != 'none.gif'){
-                timeTransition = 1700;
+                timeTransition = $("#"+e.target.id).attr("transition-time");
                 hide_building_names();
                 executeTransition($("#"+e.target.id).attr("transition"));                
             }
@@ -157,32 +169,47 @@ function calculate_building_position() {
 
 function build_page(page_number) {
     var mydata = JSON.parse(data);
-    var imageHome = mydata['image-home'];    
+    var imageHome = mydata['image-home']; 
+    $("#building-menu").removeClass('hidden-element');   
     $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
             if (!guidedTourFlag)
                 updateGuidedTourStep(page_number, this['page-number-next']);
             hide_building_names(page_number != 1);
             clearElements();
+            if (this['menu-left'] != undefined) {
+                $("#building-menu").addClass('menu-left');
+            } else {
+                $("#building-menu").removeClass('menu-left');
+            }
             /* MAIN CONTENT START*/
             if (this['page-title'] != "None")
                 $("#building-menu-title").html(this['page-title']);
             $(this['menu-items']).each(function(){
-                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"'>"+this['item-name']+"</a>");
+                var new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"' transition-time='"+(this['transition-time']!=undefined?this['transition-time']:0)+"'>"+this['item-name']+"</a>");
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
                         $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
-                        countdown(5);
+                        if (!guidedTourFlag)
+                            countdown(parseInt(e.target.getAttribute("transition-time"))/1000);
                         setTimeout(function(){
                             $("#homescreen-image").attr('src', imageFolder + imageHome);
-                            clearInterval(intervalId);    
-                            $("#countdown").addClass("hidden-element");                        
-                        }, 5000);
+                            clearInterval(intervalId);                                                        
+                        }, e.target.getAttribute("transition-time"));
                     });                    
                 } else {
                     new_ele.on('click',function() {
-                        build_page($(this).attr('next-page'));
+                        var next_page = $(this).attr('next-page');
+                        var transition_image = $(this).attr('item-image');
+                        var transition_time = $(this).attr('transition-time');
+                        if (transition_image != "undefined") {
+                            executeTransition(transition_image);
+                        }
+                        setTimeout(function(){
+                            build_page(next_page);
+                            clearInterval(intervalId);                                                        
+                        }, transition_time);                    
                     });                    
                 }                
             });
@@ -202,11 +229,20 @@ function build_page(page_number) {
                 $("#building-menu-title-problem").html(this['page-title-problem']);
 
             $(this['menu-items-problem']).each(function(){
-                new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"'>"+this['item-name']+"</a>");
+                var new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"' transition-time='"+(this['transition-time']!=undefined?this['transition-time']:0)+"'>"+this['item-name']+"</a>");
                 $("#building-menu-items-problem").append(new_ele); 
                 new_ele.on('click',function() {
-                    build_page($(this).attr('next-page'));
-                });                  
+                    var next_page = $(this).attr('next-page');
+                    var transition_image = $(this).attr('item-image');
+                    var transition_time = $(this).attr('transition-time');
+                    if (transition_image != "undefined") {
+                        executeTransition(transition_image);
+                    }
+                    setTimeout(function(){
+                        build_page(next_page);
+                        clearInterval(intervalId);                                                        
+                    }, transition_time);                    
+                });
             });
 
             $(this['page-description-problem']).each(function(i){
@@ -218,7 +254,39 @@ function build_page(page_number) {
             } else {
                 $("#building-menu-problem").removeClass('hidden-element');                
             }
-            /* PROBLEM CONTENT END*/            
+            /* PROBLEM CONTENT END*/
+            
+            /* HOW IT WORKS START */
+            if (this['page-title-work'] != undefined)
+                $("#building-menu-title-work").html(this['page-title-work']);
+
+            $(this['menu-items-work']).each(function(){
+                var new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"' transition-time='"+(this['transition-time']!=undefined?this['transition-time']:0)+"'>"+this['item-name']+"</a>");
+                $("#building-menu-items-work").append(new_ele); 
+                new_ele.on('click',function() {
+                    var next_page = $(this).attr('next-page');
+                    var transition_image = $(this).attr('item-image');
+                    var transition_time = $(this).attr('transition-time');
+                    if (transition_image != "undefined") {
+                        executeTransition(transition_image);
+                    }
+                    setTimeout(function(){
+                        build_page(next_page);
+                        clearInterval(intervalId);                                                        
+                    }, transition_time);                    
+                });
+            });
+
+            $(this['page-description-work']).each(function(i){
+                    $("#building-menu-description-work").append("<p>"+this[i]+"<p>");
+            });
+
+            if ($("#building-menu-title-work").is(":empty") && $("#building-menu-items-work").is(":empty") && $("#building-menu-description-work").is(":empty")) {
+                $("#building-menu-work").addClass('hidden-element');                
+            } else {
+                $("#building-menu-work").removeClass('hidden-element');                
+            }
+            /* HOW IT WORKS END */
             
             if (!isVideo(this['page-img'])) {
                 $("#homescreen-image").removeClass('hidden-element');
@@ -282,23 +350,29 @@ function build_page(page_number) {
                 }                
             } 
             var page_number_previous = this['page-number-previous'];
-            if (this['page-transition'] != undefined)
-                $("#back-button").attr('page-transition', this['page-transition']);
-            else
+            if (this['page-transition-out'] != undefined){
+                $("#back-button").attr('page-transition', this['page-transition-out']);
+                $("#back-button").attr('page-transition-time', this['page-transition-time']);
+            }
+            else{
                 $("#back-button").removeAttr('page-transition');
+                $("#back-button").removeAttr('page-transition-time');
+            }
             $('#back-button').on('click', function(){
-                if (guidedTourFlag) 
-                    return;
                 var timeTransition = 0;
                 if ($("#back-button").attr('page-transition') != undefined){
-                    timeTransition = 1700;
+                    timeTransition = $("#back-button").attr('page-transition-time');
                     hide_building_names();
                     executeTransition($("#back-button").attr('page-transition'));                    
                 }
                 setTimeout(function(){
+                    console.log(page_number_previous);
                     build_page(page_number_previous);
                 }, timeTransition);                
             });    
+            if (guidedTourFlag) {
+                runGuidedTour();
+            }
             return
         }            
     });
@@ -317,13 +391,16 @@ function hide_building_names(value=true) {
 }
 
 function countdown(seconds) {
+    clearInterval(intervalId);
     $("#countdown").removeClass("hidden-element");
     var countdownNumberEl = document.getElementById('countdown-number');
     var countdown = seconds;
-    countdownNumberEl.textContent = countdown;
+    countdownNumberEl.textContent = countdown--;
     intervalId = setInterval(function() {
-        countdown = --countdown <= 0 ? seconds : countdown;
-        countdownNumberEl.textContent = countdown;            
+        //countdown = --countdown <= 0 ? seconds : countdown;
+        countdownNumberEl.textContent = countdown--;  
+        if (countdown < 0)
+            $("#countdown").addClass("hidden-element"); 
     }, 1000);
 }
 
@@ -336,6 +413,7 @@ function isVideo(filename) {
 }
 
 function executeTransition(filename) {
+    $("#building-menu").addClass('hidden-element');
     $("#homescreen-image").addClass('hidden-element');
     $("#homescreen-video").addClass('hidden-element');
     if (isVideo(filename)) {
@@ -355,6 +433,9 @@ function clearElements() {
     $("#building-menu-items-problem").html('');
     $("#building-menu-title-problem").html(''); 
     $("#building-menu-description-problem").html('');
+    $("#building-menu-items-work").html('');
+    $("#building-menu-title-work").html(''); 
+    $("#building-menu-description-work").html('');
     $("#homescreen-audio source").attr('src', '');
     $("#homescreen-audio source").attr('type', '');
     $("#homescreen-audio track").attr('src', '');
@@ -386,23 +467,25 @@ function updateGuidedTourStep(page_number, next_page) {
 }
 
 function runGuidedTour() {
-    if (currentStep >= guidedTour.length-1 || !guidedTourFlag)
+    if (!guidedTourFlag)
         return;
-    if (guidedTour[currentStep]['building'] != undefined){
-        countdown(guidedTour[currentStep]['time']);
-        $("#building1").trigger('click');
-    } else {
-        countdown(guidedTour[currentStep]['time']);
-        build_page(guidedTour[currentStep]['page_number']);
+    if (currentStep >= guidedTour.length-1) {
+        resetGuidedTourStates();
+        currentStep = 0;
     }
+    $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").addClass("animated-item");
     setTimeout(function(){
-        $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").css("background-color", "#333");        
-    }, 2000);
-    setTimeout(function(){
-        clearInterval(intervalId);
-        currentStep += 1;    
-        $("#countdown").addClass("hidden-element");
+        if (!guidedTourFlag)
+            return;
+        countdown(guidedTour[currentStep]['time']);
         guidedTour[currentStep]['state'] = true;
-        runGuidedTour();    
+        if (guidedTour[currentStep]['building'] != undefined) {
+            $("#"+guidedTour[currentStep]['building']).trigger('click');
+        } else if (guidedTour[currentStep]['next_page'] === 0){
+            $("#back-button").trigger('click');
+        } else {
+            $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").trigger('click');
+        }
+        currentStep += 1;
     }, parseInt(guidedTour[currentStep]['time']) * 1000);    
 }

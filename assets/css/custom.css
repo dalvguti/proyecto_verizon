@@ -90,12 +90,16 @@ html, body {
     padding: 5px;
     z-index: 1;
     position: absolute;
-    right: 2%;
     width: 450px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     height: 98%;
+    right: 2%;
+}
+
+.menu-left {
+  left: 2% !important;
 }
 
 #building-menu a {
@@ -113,29 +117,38 @@ html, body {
   opacity: 0.8;
 }
 
-#building-menu-problem {
+#building-menu-problem,
+#building-menu-work {
   margin: 0;
 }
 
-#building-menu-content, #building-menu-content-problem {
+#building-menu-content,
+#building-menu-content-problem, 
+#building-menu-content-work {
   background-color: black;
   opacity: 0.8;
   color: white;
   border-radius: 5px;
   margin: 5px 0.5em;
-  padding: 20px 10px 20px 10px;
+  padding: 10px;
 }
 
-#building-menu-title, #building-menu-title-problem {
+#building-menu-title, 
+#building-menu-title-problem,
+#building-menu-title-work {
   font-weight: bold;
   font-size: 1.5em;
 }
 
-#building-menu-description p, #building-menu-description-problem p {
+#building-menu-description p,
+#building-menu-description-problem p,
+#building-menu-description-work p {
   font-size: 0.8em;
 }
 
-#building-menu-content h3, #building-menu-content-problem h3 {
+#building-menu-content h3, 
+#building-menu-content-problem h3,
+#building-menu-content-work h3 {
   margin: 5px 0 5px 0;
 }
 
@@ -287,3 +300,44 @@ html, body {
    100% {background-position:20px 20px,10px 10px,0    0   } 
 }
 /* LOADING END */
+
+/* ANIMATION EFFECT FOR SELECTED ITEM IN LIST */
+.animated-item {
+  /*position: absolute;*/
+  animation-name: flicker;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:flicker;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes flicker{  
+  10% { opacity: 0.8; background-color: #333; color: #fff; }
+  30% { opacity: 0.5; background-color: #333; color: #fff; }
+  50% { opacity: 0.0; background-color: #333; color: #fff; }
+  70% { opacity: 0.5; background-color: #333; color: #fff; }
+  90% { opacity: 0.8; background-color: #333; color: #fff; }
+}
+
+@-webkit-keyframes flicker {  
+  10% { opacity: 0.8; background-color: #333; color: #fff; }
+  30% { opacity: 0.5; background-color: #333; color: #fff; }
+  50% { opacity: 0.0; background-color: #333; color: #fff; }
+  70% { opacity: 0.5; background-color: #333; color: #fff; }
+  90% { opacity: 0.8; background-color: #333; color: #fff; }
+}
+
+@keyframes flicker {  
+  0% { opacity: 1.0; }
+  10% { opacity: 0.8; background-color: #333; color: #fff; }
+  30% { opacity: 0.5; background-color: #333; color: #fff; }
+  50% { opacity: 0.0; background-color: #333; color: #fff; }
+  70% { opacity: 0.5; background-color: #333; color: #fff; }
+  90% { opacity: 0.8; background-color: #333; color: #fff; }
+  100% { opacity: 1.0; }
+}
+/* ANIMATION EFFECT FOR SELECTED ITEM IN LIST */
