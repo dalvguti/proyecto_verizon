@@ -473,11 +473,13 @@ function runGuidedTour() {
         resetGuidedTourStates();
         currentStep = 0;
     }
+    var timeStep = 0;
     $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").addClass("animated-item");
+    timeStep = guidedTour[currentStep]['time'];
+    countdown(timeStep);
     setTimeout(function(){
         if (!guidedTourFlag)
             return;
-        countdown(guidedTour[currentStep]['time']);
         guidedTour[currentStep]['state'] = true;
         if (guidedTour[currentStep]['building'] != undefined) {
             $("#"+guidedTour[currentStep]['building']).trigger('click');
@@ -487,5 +489,5 @@ function runGuidedTour() {
             $("a[next-page='"+guidedTour[currentStep]['next_page']+"']").trigger('click');
         }
         currentStep += 1;
-    }, parseInt(guidedTour[currentStep]['time']) * 1000);    
+    }, parseInt(timeStep) * 1000);    
 }

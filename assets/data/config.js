@@ -8,7 +8,7 @@ data =
         '"title": "Título del documento",' +
         '"back-button": "BACK",' +
         '"bottom-menu": {' +
-            '"guide-button": "Tour Guide",' +
+            '"guide-button": "Guided Tour",' +
             '"pause-guide-button": "Pause Guide"' +
         '},' +
         '"buildings":[' +
@@ -189,7 +189,9 @@ data =
                     '},' +  
                     '{' +
                         '"item-name": "Accelerated Access",' +
-                        '"page-number-next":0' +           
+                        '"item-image":"TO_AcceleratedAccess.mp4",' +
+                        '"transition-time": 2000,' +          
+                        '"page-number-next":20' +           
                     '}' + 
                 '],' +
                 '"page-title-problem":"None",' +
@@ -599,6 +601,79 @@ data =
                 '"page-number":19,' +
                 '"page-number-next":0,' +
                 '"page-number-previous":13,' +
+                '"page-building":"building1",' +
+                '"page-img":"CashierlessSecurity.mp4",' +
+                '"page-transition-out":"FROM_CashierlessSecurity.mp4",' +
+                '"page-transition-time":1000,' +
+                '"page-subtitles":{' +
+                    '"type":"video",' +
+                    '"file":"CashierlessSecurity.vtt"' +
+                '},' +
+                '"page-name":"Convention Center",' +
+                '"page-title":"None",' +
+                '"page-description":[' +
+                '],' +
+                '"menu-items": [],' +
+                '"page-title-problem":"None",' +
+                '"page-description-problem":[],' +
+                '"menu-items-problem": []' +
+            '},' +
+            '{' +
+                '"page-number":20,' +
+                '"page-number-next":21,' +
+                '"page-number-previous":2,' +
+                '"page-building":"building1",' +
+                '"page-img":"AcceleratedAccess.mp4",' +
+                '"page-transition-out":"FROM_AcceleratedAccess.mp4",' +
+                '"page-transition-time":2500,' +
+                '"menu-left":true,' +
+                '"page-name":"Convention Center",' +
+                '"page-title":"The Solution",' +
+                '"page-description":[' +
+                '],' +
+                '"menu-items": [' +
+                    '{' +
+                        '"item-name": "Accelerated Access",' +
+                        '"page-number-next":22' +                
+                    '}' +
+                '],' +
+                '"page-title-problem":"The Problem",' +
+                '"page-description-problem":[],' +
+                '"menu-items-problem": [' +
+                    '{' +
+                        '"item-name": "Slow Identity Verification Process",' +
+                        '"item-image":"TO_SlowIdentity.mp4",' +
+                        '"transition-time": 2000,' +                  
+                        '"page-number-next":21' +                
+                    '}' + 
+                '],' +
+                '"page-title-work":"How it Works",' +
+                '"page-description-work":[],' +
+                '"menu-items-work": [' +
+                    '{' +
+                        '"item-name": "Registration and Selfie Data",' +
+                        '"item-image":"TO_Registration.mp4",' +
+                        '"transition-time": 2000,' +                  
+                        '"page-number-next":23' +                
+                    '},' +
+                    '{' +
+                        '"item-name": "Authentication Against Stored Tokens",' +
+                        '"item-image":"TO_Token.mp4",' +
+                        '"transition-time": 2000,' +                  
+                        '"page-number-next":24' +                
+                    '},' +
+                    '{' +
+                        '"item-name": "Guest Entry",' +
+                        '"item-image":"TO_FrontEntry.mp4",' +
+                        '"transition-time": 2000,' +                  
+                        '"page-number-next":25' +                
+                    '}' +
+                ']' +
+            '},' +
+            '{' +
+                '"page-number":21,' +
+                '"page-number-next":0,' +
+                '"page-number-previous":20,' +
                 '"page-building":"building1",' +
                 '"page-img":"CashierlessSecurity.mp4",' +
                 '"page-transition-out":"FROM_CashierlessSecurity.mp4",' +
