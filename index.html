@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/fonts.css">
     <link rel="stylesheet" href="./assets/css/custom.css">
     <title>Name of document</title>
 </head>
@@ -12,12 +13,7 @@
     </div>
     <div id="content">
         <div id="main-content">
-            <div id="countdown" class="hidden-element">
-                <div id="countdown-number"></div>
-                <svg>
-                    <circle r="18" cx="20" cy="20"></circle>
-                </svg>
-            </div>
+            <div id="countdown" class="hidden-element"></div>
             <div id="building-menu">
                 <div id="building-menu-overlay" class="hidden-element"></div>
                 <div id="building-menu-problem" class="hidden-element">
@@ -54,7 +50,7 @@
             <nav id="bottom-menu">
                 <a id="audio-button" state="off"></a>
                 <a id="bar-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="3vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -88,7 +84,9 @@
         </div>
     </div>
     <script src="./lib/jquery/jquery-3.7.1.min.js"></script>
+    <script src="./lib/d3.min.js"></script>
     <script src="./assets/data/config.js"></script>
+    <script src="./assets/js/countdown.js"></script>
     <script src="./assets/js/custom.js"></script>
     <script>
         initialize();

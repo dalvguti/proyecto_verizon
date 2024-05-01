@@ -41,15 +41,16 @@ html, body {
   background-color: #333;
   border-radius: 4px;
   transition-property: transform, visibility, opacity;
-  width: 120px;
+  width: 50%;
+  min-width: 120px;
 }
 
 .building-label p { 
+  font-family: VerizonNHGeTX-Bold;
   text-align: center;
   margin: 0;
   color: #fff;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 70%;
   line-height: 1.4;
   white-space: normal;
   outline: 0;
@@ -86,11 +87,10 @@ html, body {
 }
 
 #building-menu {
-    font-family: Georgia, serif;
     padding: 5px;
     z-index: 1;
     position: absolute;
-    width: 450px;
+    width: 25%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -103,20 +103,18 @@ html, body {
 }
 
 #building-menu a {
-  font-size: 0.9em;
+  font-family: VerizonNHGeTX-Bold;
+  font-size: 2vh;
   display: block;
-  margin: 5px 0.5em;
-  font-weight: bold;
-}
-
-#building-menu a {
+  margin: 5px 0.5em;  
   border-radius: 5px;
   background-color: white;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   cursor: grab;
   opacity: 0.8;
 }
 
+#building-menu-main,
 #building-menu-problem,
 #building-menu-work {
   margin: 0;
@@ -136,13 +134,14 @@ html, body {
 #building-menu-title, 
 #building-menu-title-problem,
 #building-menu-title-work {
-  font-weight: bold;
-  font-size: 1.5em;
+  font-family: VerizonNHGeTX-Bold;
+  font-size: 2.2vh;
 }
 
 #building-menu-description p,
 #building-menu-description-problem p,
 #building-menu-description-work p {
+  font-family: VerizonNHGeTX-Regular;
   font-size: 0.8em;
 }
 
@@ -164,7 +163,8 @@ html, body {
 }
 
 #bottom-menu {
-  font-family: Georgia, serif;
+  font-family: VerizonNHGeTX-Bold;
+  font-size: 1.5vh;
   position: absolute;
   bottom: 15px;
   width: 98%;
@@ -175,19 +175,20 @@ html, body {
 }
 
 #bottom-menu a {
+  display: flex;
+  align-items: center;
   border-radius: 5px;
   background-color: white;
-  font-weight: bold;
   padding: 5px;
   cursor: grab;
   opacity: 0.8;
-  line-height: 2;
+  line-height: 1.5vh;  
 }
 
 #audio-button {
   background-image: url(../img/sound_off.png);
-  width: 35px;
-  background-size: 30px 30px;
+  width: 2.5vw;
+  background-size: 2vw 3vh;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -231,45 +232,31 @@ html, body {
   margin: auto;
   top: 5px;
   left: 5px;
-  height: 40px;
-  width: 40px;
+  height: 4vh;
+  width: 4vh;
   text-align: center;
   border-radius: 25px;
   padding: 5px;
+  z-index: 3;
 }
 
-#countdown-number {
-  color: white;
-  display: inline-block;
-  line-height: 40px;
+#countdown .path--background {
+  fill: #fff;
+  stroke: #333;
+  stroke-width: 0px;
 }
 
-#countdown svg {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 40px;
-  height: 40px;
-  transform: rotateY(-180deg) rotateZ(-90deg);
+#countdown .path--foreground {
+  fill: #eee;
+  stroke: #eee;
+  stroke-width: 2px;
 }
 
-#countdown svg circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: round;
-  stroke-width: 4px;
-  stroke: white;
-  fill: none;
-  animation: countdown 10s linear infinite forwards;
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0px;
-  }
-  to {
-    stroke-dashoffset: 113px;
-  }
+#countdown .label {
+  font-family: "VerizonNHGeTX-Bold";
+  font-weight: 900;
+  text-anchor: middle;
+  fill: #fff;
 }
 /*COUNTDOWN STYLE END*/
 

@@ -85,7 +85,7 @@ data =
                 '"left":"28%",' +
                 '"transform":-30,' +
                 '"height":"(1.2*(imageWidth/10))",' +
-                '"width":"(2.5*(imageWidth/10))"' +               
+                '"width":"(1.5*(imageWidth/10))"' +               
             '},' +
             '{' +
                 '"element-name":"building6",' +
@@ -100,7 +100,7 @@ data =
                 '"left":"8%",' +
                 '"transform":-30,' +
                 '"height":"(1.2*(imageWidth/10))",' +
-                '"width":"(2*(imageWidth/10))"' +                
+                '"width":"(1.5*(imageWidth/10))"' +                
             '}' +
         '],' + 
         '"pages":[' +
@@ -178,7 +178,7 @@ data =
                     '{' +
                         '"item-name": "Wireless Mutli-Carrier Connectivity",' +
                         '"item-image":"TO_MultiCarrier.mp4",' +
-                        '"transition-time": 1000,' +             
+                        '"transition-time": 2000,' +             
                         '"page-number-next":3' +                
                     '},' + 
                     '{' +
@@ -776,7 +776,7 @@ guided_tour =
         '},' +
         '{' +
             '"step": 11,' +       
-            '"time": 7,' +     
+            '"time": 5,' +     
             '"page_number": 8,' +
             '"next_page": 0,' +
             '"state": false' +
@@ -797,14 +797,14 @@ guided_tour =
         '},' +
         '{' +
             '"step": 14,' +       
-            '"time": 25,' +     
+            '"time": 24,' +     
             '"page_number": 10,' +
             '"next_page": 0,' +
             '"state": false' +
         '},' +
         '{' +
             '"step": 15,' +       
-            '"time": 2,' +     
+            '"time": 5,' +     
             '"page_number": 9,' +
             '"next_page": 0,' +
             '"state": false' +

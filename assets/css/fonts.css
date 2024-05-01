@@ -1,0 +1,19 @@
+@font-face {
+    font-family: VerizonNHGeDS-Regular;
+    src: url(../fonts/VerizonNHGeDS-Regular.woff);
+}
+
+@font-face {
+    font-family: VerizonNHGeDS-Bold;
+    src: url(../fonts/VerizonNHGeDS-Bold.woff);
+}
+
+@font-face {
+    font-family: VerizonNHGeTX-Regular;
+    src: url(../fonts/VerizonNHGeTX-Regular.woff);
+}
+
+@font-face {
+    font-family: VerizonNHGeTX-Bold;
+    src: url(../fonts/VerizonNHGeTX-Bold.woff);
+}
