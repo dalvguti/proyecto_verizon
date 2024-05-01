@@ -178,7 +178,7 @@ data =
                     '{' +
                         '"item-name": "Wireless Mutli-Carrier Connectivity",' +
                         '"item-image":"TO_MultiCarrier.mp4",' +
-                        '"transition-time": 2000,' +             
+                        '"transition-time": 1700,' +             
                         '"page-number-next":3' +                
                     '},' + 
                     '{' +
@@ -203,10 +203,10 @@ data =
                 '"page-number-next":4,' +
                 '"page-number-previous":2,' +
                 '"page-building":"building1",' +
-                '"page-img":"convention_center.png",' +
+                '"page-img":"MultiCarrier.mp4",' +
                 '"page-name":"Convention Center",' +
                 '"page-transition-out":"FROM_MultiCarrier.mp4",' +
-                '"page-transition-time":1000,' +
+                '"page-transition-time":1700,' +
                 '"page-title":"WirelessMulti-Carrier Connectivity",' +
                 '"page-description":[],' +
                 '"menu-items": [' +
