@@ -50,6 +50,9 @@ function initialize() {
             }
             if ($("#homescreen-video source").attr('src') != '') {
                 $("#homescreen-video").prop('muted', false);
+                $("#homescreen-video")[0].pause();
+                $("#homescreen-video")[0].currentTime = 0;
+                $("#homescreen-video")[0].load();
             }            
         }else {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_off.png)')
