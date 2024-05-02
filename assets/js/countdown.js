@@ -90,6 +90,7 @@ function updateTimer() {
 }
 
 function destroyTimer() {
+    clearTimeout(timerInstance);
     $("#countdown").addClass("hidden-element");
     $("#countdown").empty();
     timerStarted = false;

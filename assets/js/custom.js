@@ -9,6 +9,7 @@ let pageNumber = 1;
 let guidedTour = JSON.parse(guided_tour);
 let currentStep = -1;
 let guidedTourFlag = false;
+let guidedTourInstance = null;
 const allowedImages = ['.jpg', '.png', '.gif'];
 const getExtension = str => str.slice(str.lastIndexOf("."));
 let loadPromise = new Promise(function(resolve, reject) {
@@ -37,9 +38,7 @@ function initialize() {
     loadPromise.then(() => {
         imageWidth = getComputedStyle(document.getElementById("homescreen-image")).width.replace('px','');
         imageHeight = getComputedStyle(document.getElementById("homescreen-image")).height.replace('px','');
-        setTimeout(() => {
-            calculate_building_position();
-        }, 1000)    
+        calculate_building_position();
     });
     $("#audio-button").on('click', function(){
         if ($(this).attr('state') == 'off') {
@@ -106,7 +105,6 @@ function initialize() {
             $("#building-menu-overlay").addClass('hidden-element');
             guidedTourFlag = false;
             clearTimeout(guidedTourInstance);
-            clearTimeout(timerInstance);
             destroyTimer();
         }
         if (guidedTourFlag) {
@@ -395,11 +393,11 @@ function build_page(page_number) {
                     executeTransition($("#back-button").attr('page-transition'));                    
                 }
                 setTimeout(function(){
-                    console.log(page_number_previous);
                     build_page(page_number_previous);
                 }, timeTransition);                
             });    
             if (guidedTourFlag) {
+                $('#back-button').addClass("hidden-element");
                 runGuidedTour();
             }
             return
@@ -498,7 +496,7 @@ function updateGuidedTourStep(page_number, next_page) {
 function runGuidedTour() {
     if (!guidedTourFlag)
         return;
-    if (currentStep >= guidedTour.length-1) {
+    if (currentStep > guidedTour.length-1) {
         resetGuidedTourStates();
         currentStep = 0;
     }
