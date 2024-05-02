@@ -4,6 +4,7 @@ let audioFolder = "";
 let subtitleFolder = "";
 let imageWidth = "";
 let imageHeight = "";
+let imageHome = "";
 let loadingImage = false;
 let pageNumber = 1;
 let guidedTour = JSON.parse(guided_tour);
@@ -26,6 +27,7 @@ window.onresize = calculate_building_position;
 
 function initialize() {
     var mydata = JSON.parse(data); 
+    imageHome = mydata['image-home']; 
     imageFolder = mydata['image-folder'];
     videoFolder = mydata['video-folder'];
     audioFolder = mydata['audio-folder'];
@@ -45,23 +47,36 @@ function initialize() {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_on.png)')
             $("#audio-button").attr('state', 'on');
             if ($("#homescreen-audio source").attr('src') != '') {
-                $("#homescreen-audio")[0].play();
+                //$("#homescreen-audio")[0].play();
+                $("#homescreen-audio").prop('muted', false);
             }
             if ($("#homescreen-video source").attr('src') != '') {
                 $("#homescreen-video").prop('muted', false);
-                $("#homescreen-video")[0].pause();
-                $("#homescreen-video")[0].currentTime = 0;
-                $("#homescreen-video")[0].load();
+                if (!guidedTourFlag) {
+                    $("#homescreen-video")[0].pause();
+                    $("#homescreen-video")[0].currentTime = 0;
+                    $("#homescreen-video")[0].load();
+                }                
             }            
-        }else {
+        } else {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_off.png)')
             $("#audio-button").attr('state', 'off');
             if ($("#homescreen-audio source").attr('src') != '') {
-                $("#homescreen-audio")[0].pause();
-                $("#homescreen-audio")[0].currentTime = 0;            
+                //$("#homescreen-audio")[0].pause();
+                $("#homescreen-audio").prop('muted', true);
+                if (!guidedTourFlag) {
+                    $("#homescreen-audio")[0].pause();
+                    $("#homescreen-audio")[0].currentTime = 0;            
+                    $("#homescreen-audio")[0].load();
+                }
             }
             if ($("#homescreen-video source").attr('src') != '') {
                 $("#homescreen-video").prop('muted', true);
+                if (!guidedTourFlag) {
+                    $("#homescreen-video")[0].pause();
+                    $("#homescreen-video")[0].currentTime = 0;
+                    $("#homescreen-video")[0].load();
+                }
             }
         }
     });
@@ -174,7 +189,6 @@ function calculate_building_position() {
 
 function build_page(page_number) {
     var mydata = JSON.parse(data);
-    var imageHome = mydata['image-home']; 
     $("#building-menu").removeClass('hidden-element');   
     $(mydata['pages']).each(function(){
         if (this['page-number'] == page_number) {
@@ -195,14 +209,13 @@ function build_page(page_number) {
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
-                        $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
-                        $("#building-menu-overlay").removeClass('hidden-element');
-                        if (!guidedTourFlag)
-                            countdown(parseInt(e.target.getAttribute("transition-time"))/1000);
-                        setTimeout(function(){
-                            $("#homescreen-image").attr('src', imageFolder + imageHome);
-                            $("#building-menu-overlay").addClass('hidden-element');                                                                                
-                        }, e.target.getAttribute("transition-time"));
+                        if (!$(e.target).hasClass('animated-item')) {
+                            clearBuilding();
+                            $(e.target).addClass('animated-item');
+                            $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
+                        } else {
+                            clearBuilding();
+                        }                       
                     });                    
                 } else {
                     new_ele.on('click',function() {
@@ -429,6 +442,11 @@ function countdown(seconds) {
     $("#countdown").removeClass("hidden-element");
     calculateCountdownVariables();
     updateTimer();
+}
+
+function clearBuilding(){
+    $("#homescreen-image").attr('src', imageFolder + imageHome);
+    $("#building-menu-items a").removeClass("animated-item");
 }
 
 function isLoadingImage(){
