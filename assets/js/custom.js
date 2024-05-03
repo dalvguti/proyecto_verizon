@@ -14,9 +14,9 @@ let guidedTourInstance = null;
 const allowedImages = ['.jpg', '.png', '.gif'];
 const getExtension = str => str.slice(str.lastIndexOf("."));
 let loadPromise = new Promise(function(resolve, reject) {
-    img = document.getElementById('homescreen-image');
+    var img = document.getElementById('homescreen-image');
     img.addEventListener('load', function() {
-       resolve();
+        resolve();
     });
     setTimeout(() => {
         if (!img.complete) reject('Timeout');
@@ -47,7 +47,12 @@ function initialize() {
             $("#audio-button").css('background-image', 'url(./assets/img/sound_on.png)')
             $("#audio-button").attr('state', 'on');
             if ($("#homescreen-audio source").attr('src') != '') {
-                //$("#homescreen-audio")[0].play();
+                if (!guidedTourFlag) {
+                    $("#homescreen-audio")[0].pause();
+                    $("#homescreen-audio")[0].currentTime = 0;            
+                    $("#homescreen-audio")[0].load();
+                }
+                $("#homescreen-audio")[0].play();
                 $("#homescreen-audio").prop('muted', false);
             }
             if ($("#homescreen-video source").attr('src') != '') {
@@ -209,10 +214,13 @@ function build_page(page_number) {
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
                     new_ele.on('click',function(e) {
-                        if (!$(e.target).hasClass('animated-item')) {
+                        if (!$(e.target).hasClass('selected-item')) {
                             clearBuilding();
-                            $(e.target).addClass('animated-item');
-                            $("#homescreen-image").attr('src', imageFolder + e.target.getAttribute("item-image"));
+                            $(e.target).addClass('selected-item');
+                            $("#homescreen-image").fadeTo(1000, 0.5, function(){
+                                $('#homescreen-image').fadeTo(1000, 1);
+                                executeTransition(e.target.getAttribute("item-image"), true);
+                            });
                         } else {
                             clearBuilding();
                         }                       
@@ -445,8 +453,11 @@ function countdown(seconds) {
 }
 
 function clearBuilding(){
-    $("#homescreen-image").attr('src', imageFolder + imageHome);
-    $("#building-menu-items a").removeClass("animated-item");
+    $("#homescreen-image").fadeTo(1000, 0.5, function(){
+        $('#homescreen-image').fadeTo(1000, 1);
+        executeTransition(imageHome, true);
+    });
+    $("#building-menu-items a").removeClass("selected-item");
 }
 
 function isLoadingImage(){
@@ -457,8 +468,11 @@ function isVideo(filename) {
     return !allowedImages.includes(getExtension(filename));
 }
 
-function executeTransition(filename) {
-    $("#building-menu").addClass('hidden-element');
+function executeTransition(filename, showBuildingMenu=false) {
+    if (showBuildingMenu)
+        $("#building-menu").removeClass('hidden-element');
+    else
+        $("#building-menu").addClass('hidden-element');
     $("#homescreen-image").addClass('hidden-element');
     $("#homescreen-video").addClass('hidden-element');
     if (isVideo(filename)) {

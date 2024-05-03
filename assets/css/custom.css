@@ -219,11 +219,10 @@ html, body {
   border-radius: 15px;
 }
 
-@media (min-width: 1024px) {
-    /*#main-content {
-        margin: 0 auto;
-        width: 80%;        
-    }*/   
+.selected-item {
+  opacity: 0.8 !important; 
+  background-color: #333 !important; 
+  color: #fff !important;
 }
 
 /* COUNTDOWN STYLE BEGINING*/
