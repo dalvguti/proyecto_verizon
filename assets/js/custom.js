@@ -222,6 +222,7 @@ function build_page(page_number) {
                             executeTransition(e.target.getAttribute("item-image"), true);
                         } else {
                             clearBuilding();
+                            executeTransition(imageHome, true);
                         }                       
                     });                    
                 } else {
@@ -468,12 +469,12 @@ function executeTransition(filename, showBuildingMenu=false) {
     activeImage = $("#images-container img:not(.hidden-element)");
     activeVideo = $("#videos-container video:not(.hidden-element)");
 
-    if (activeVideo.length > 0) { //video is active
-        $("#videos-container video").addClass('hidden-element');
+    $("#videos-container video").addClass('hidden-element');
+    $("#images-container img").addClass('hidden-element');
+    if (activeVideo.length > 0) { //video is active        
         if (!isVideo(filename))
             $("#videos-container").addClass('hidden-element');
-    } else {
-        $("#images-container img").addClass('hidden-element');
+    } else {        
         if (isVideo(filename))
             $("#images-container").addClass('hidden-element');
     }
