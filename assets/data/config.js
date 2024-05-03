@@ -846,7 +846,7 @@ guided_tour =
         '},' +
         '{' +
             '"step": 21,' +       
-            '"time": 5,' +     
+            '"time": 20,' +     
             '"page_number": 3,' +
             '"next_page": 13,' +
             '"state": false' +
