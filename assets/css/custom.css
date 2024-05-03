@@ -110,7 +110,7 @@ html, body {
   margin: 5px 0.5em;  
   border-radius: 5px;
   background-color: white;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px 8% 10px;
   cursor: grab;
   opacity: 0.8;
 }
@@ -143,7 +143,7 @@ html, body {
 #building-menu-description-problem p,
 #building-menu-description-work p {
   font-family: VerizonNHGeTX-Regular;
-  font-size: 0.8em;
+  font-size: 1.8vh;
 }
 
 #building-menu-content h3, 
@@ -421,3 +421,20 @@ html, body {
   100% { opacity: 1; }
 }
 /* FADE OUT EFFECT*/
+
+@media screen and (min-width: 1920px) {
+  #building-menu a {
+    font-size: 18px;
+  }
+  #building-menu-title, 
+  #building-menu-title-problem,
+  #building-menu-title-work {
+    font-size: 20px;
+  }
+
+  #building-menu-description p,
+  #building-menu-description-problem p,
+  #building-menu-description-work p {
+    font-size: 16px;
+  }
+}

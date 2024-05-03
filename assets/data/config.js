@@ -125,36 +125,41 @@ data =
                     '{"1":"Click any building to learn about our business solutions."},' +
                     '{"2":"Or Click on a business outcome below to discover which industries are harnessing Verizon technologies."}' +
                 '],' +
+                '"margin-items":{' +
+                    '"title":"15%",' +
+                    '"problem":"0",' +
+                    '"solution":"0"' +
+                '},' +
                 '"menu-items": [' +
                     '{' +
                         '"item-name": "Business Outcome 1",' +
                         '"item-image": "Business_Outcome_1_00000.png",' +
-                        '"transition-time": 5000' +                
+                        '"box-padding": "8%"' +                
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 2",' +
                         '"item-image": "Business_Outcome_2_00000.png",' +
-                        '"transition-time": 5000' +                
+                        '"box-padding": "8%"' +
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 3",' +
                         '"item-image": "Business_Outcome_3_00000.png",' +
-                        '"transition-time": 5000' +                 
+                        '"box-padding": "8%"' +
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 4",' +
                         '"item-image": "Business_Outcome_4_00000.png",' +
-                        '"transition-time": 5000' +                 
+                        '"box-padding": "8%"' +
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 5",' +
                         '"item-image": "Business_Outcome_5_00000.png",' +
-                        '"transition-time": 5000' +                 
+                        '"box-padding": "8%"' +
                     '},' + 
                     '{' +
                         '"item-name": "Business Outcome 6",' +
                         '"item-image": "Business_Outcome_6_00000.png",' +
-                        '"transition-time": 5000' +                 
+                        '"box-padding": "8%"' +
                     '}' + 
                 ']' +
             '},' +
@@ -177,6 +182,11 @@ data =
                     '{"0":"Convention centers of the future enhance connectivity and provide quicker, simpler access to services and amenities."},' +
                     '{"1":"Select a demo to learn more."}' +
                 '],' +
+                '"margin-items":{' +
+                    '"title":"15%",' +
+                    '"problem":"0",' +
+                    '"solution":"0"' +
+                '},' +
                 '"menu-items": [' +
                     '{' +
                         '"item-name": "Wireless Mutli-Carrier Connectivity",' +

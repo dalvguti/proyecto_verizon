@@ -217,13 +217,25 @@ function build_page(page_number) {
             } else {
                 $("#building-menu").removeClass('menu-left');
             }
+            if (this['margin-items'] != undefined) {
+                $("#building-menu-items").css('margin-top', this['margin-items']['title']);
+                $("#building-menu-items-problem").css('margin-top', this['margin-items']['problem']);
+                $("#building-menu-items-work").css('margin-top', this['margin-items']['solution']);
+            } else {
+                $("#building-menu-items").css('margin-top', 0);
+                $("#building-menu-items-problem").css('margin-top', 0);
+                $("#building-menu-items-work").css('margin-top', 0);
+            }
             /* MAIN CONTENT START*/
             if (this['page-title'] != "None")
-                $("#building-menu-title").html(this['page-title']);
+                $("#building-menu-title").html(this['page-title']);            
             $(this['menu-items']).each(function(){
                 var new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"' transition-time='"+(this['transition-time']!=undefined?this['transition-time']:0)+"'>"+this['item-name']+"</a>");
                 if (this['item-image'] != undefined) {
                     addFileToBuffer(this['item-image'], true);                    
+                }
+                if (this['box-padding'] != undefined){
+                    new_ele.css('padding-bottom', this['box-padding']);
                 }
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
