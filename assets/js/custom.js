@@ -45,11 +45,12 @@ function initialize() {
         calculate_building_position();
     });
     $("#audio-button").on('click', function(){
-        var videoActive = $("#videos-content video:not(hidden-element)");
+        var videoActive = $("#videos-container video:not(.hidden-element)");
         if ($(this).attr('state') == 'off') {
-            $("#audio-button").css('background-image', 'url(./assets/img/sound_on.png)')
+            $("#audio-button").removeClass('audio-button-off');
+            $("#audio-button").addClass('audio-button-on');
             $("#audio-button").attr('state', 'on');
-            if ($("#homescreen-audio source").attr('src') != '') {
+            if (videoActive.length === 0) {
                 if (!guidedTourFlag) {
                     $("#homescreen-audio")[0].pause();
                     $("#homescreen-audio")[0].currentTime = 0;            
@@ -57,19 +58,19 @@ function initialize() {
                 }
                 $("#homescreen-audio")[0].play();
                 $("#homescreen-audio").prop('muted', false);
-            }
-            if (videoActive.length > 0) {
-                videoActive[0].prop('muted', false);
+            } else {
+                $(videoActive[0]).prop('muted', false);
                 if (!guidedTourFlag) {
-                    videoActive[0][0].pause();
-                    videoActive[0][0].currentTime = 0;
-                    videoActive[0][0].load();
+                    $(videoActive[0])[0].pause();
+                    $(videoActive[0])[0].currentTime = 0;
+                    $(videoActive[0])[0].load();
                 }
             }           
         } else {
-            $("#audio-button").css('background-image', 'url(./assets/img/sound_off.png)')
+            $("#audio-button").removeClass('audio-button-on');
+            $("#audio-button").addClass('audio-button-off');
             $("#audio-button").attr('state', 'off');
-            if ($("#homescreen-audio source").attr('src') != '') {
+            if (videoActive.length === 0) {
                 //$("#homescreen-audio")[0].pause();
                 $("#homescreen-audio").prop('muted', true);
                 if (!guidedTourFlag) {
@@ -77,24 +78,23 @@ function initialize() {
                     $("#homescreen-audio")[0].currentTime = 0;            
                     $("#homescreen-audio")[0].load();
                 }
-            }
-            if (videoActive.length > 0) {
-                videoActive[0].prop('muted', true);
+            } else {
+                $(videoActive[0]).prop('muted', true);
                 if (!guidedTourFlag) {
-                    videoActive[0][0].pause();
-                    videoActive[0][0].currentTime = 0;
-                    videoActive[0][0].load();
+                    $(videoActive[0])[0].pause();
+                    $(videoActive[0])[0].currentTime = 0;
+                    $(videoActive[0])[0].load();
                 }
             } 
         }
     });
     $("#caption-button").on('click', function(){
-        var videoActive = $("#videos-content video:not(hidden-element)");
+        var videoActive = $("#videos-container video:not(.hidden-element)");
         var name_element_subtitles = '';
-        if ($("#homescreen-audio track").attr('src') != '') {
+        if (videoActive.length === 0) {
             name_element_subtitles = 'homescreen-audio';
-        } else if (videoActive.length > 0) {
-            name_element_subtitles = videoActive[0].attr('id');
+        } else {
+            name_element_subtitles = $(videoActive[0]).attr('id');
         }
         if ($(this).attr('state') == 'off') {
             $(this).css('background-color', '#333');
@@ -317,14 +317,16 @@ function build_page(page_number) {
             if (isVideo(this['page-img'])) {                
                 if (this['page-subtitles'] != undefined) {
                     if (this['page-subtitles']['type'] == 'video') {
+                        console.log(getFileName(this['page-img']));
+                        $("#"+getFileName(this['page-img'])+" track").attr('src', subtitleFolder+this['page-subtitles']['file']);
+                        document.getElementById(getFileName(this['page-img'])).textTracks[0].mode = 'hidden';  
                         $("#homescreen-audio track").attr('src', '');
-                    }  
+                    } 
                     if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
                         $("#subtitle-content").removeClass('hidden-element');
                     else
                         $("#subtitle-content").addClass('hidden-element');                  
                 }
-                console.log(getFileName(this['page-img']));
                 document.getElementById(getFileName(this['page-img'])).load();
                 document.getElementById(getFileName(this['page-img'])).textTracks[0].removeEventListener('cuechange', function() {
                     try {
@@ -458,7 +460,6 @@ function isVideo(filename) {
 
 function executeTransition(filename, showBuildingMenu=false) {
     var divId = getFileName(filename);
-    console.log(divId);
     if (showBuildingMenu)
         $("#building-menu").removeClass('hidden-element');
     else
@@ -609,7 +610,7 @@ function addFileToBuffer(filename, subtitleFile='') {
                         '/>' +
                 '</video>'
             );
-            if (subtitleFile != '') {
+            if (subtitleFile != '') {                
                 $("#"+fileId+" track").attr('src', subtitleFolder+subtitleFile);
                 document.getElementById(fileId).textTracks[0].mode = 'hidden';               
             }

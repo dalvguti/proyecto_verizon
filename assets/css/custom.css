@@ -194,11 +194,18 @@ html, body {
 }
 
 #audio-button {
-  background-image: url(../img/sound_off.png);
   width: 2.5vw;
   background-size: 2vw 3vh;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.audio-button-on {
+  background-image: url(../img/sound_on.png);
+}
+
+.audio-button-off {
+  background-image: url(../img/sound_off.png);
 }
 
 #bar-button {
