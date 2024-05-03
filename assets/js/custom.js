@@ -172,7 +172,7 @@ function calculate_building_position() {
         $("#"+elementName+' .building-label').css('left', this['name-left']);
         document.getElementById(elementName).getElementsByClassName('building-label')[0].style.transform = "rotate("+(-1*this['transform'])+"deg)";
         $("#"+elementName+" .building-label").unbind('click');
-        addFileToBuffer(this['transition']);
+        addFileToBuffer(this['transition'], true);
         document.getElementById(elementName).getElementsByClassName('building-label')[0].addEventListener("click", function(e){
             var timeTransition = 0;
             var element = $(e.target).parent().parent();
@@ -481,6 +481,7 @@ function executeTransition(filename, showBuildingMenu=false) {
 
     if (isVideo(filename)) {
         $("#"+divId).removeClass('hidden-element');
+        document.getElementById(divId).play();
         $("#videos-container").removeClass('hidden-element');        
     } else {     
         $("#"+divId).removeClass('hidden-element');
@@ -531,7 +532,7 @@ function uploadNextPageMedia(next_page) {
             if (this['page-img'] != undefined)
                 addFileToBuffer(this['page-img']);
             if (this['page-transition-out'] != undefined)
-                addFileToBuffer(this['page-transition-out']);
+                addFileToBuffer(this['page-transition-out'], true);
             $(this['menu-items']).each(function(){
                 if (this['item-image'] != undefined)
                     addFileToBuffer(this['item-image']);
@@ -586,7 +587,7 @@ function runGuidedTour() {
     }, parseInt(timeStep) * 1000);    
 }
 
-function addFileToBuffer(filename, subtitleFile='') {
+function addFileToBuffer(filename, isTransition=false) {
     var fileId = getFileName(filename);
     if (!isVideo(filename)) { //image
         if ($("#"+fileId).length > 0){
@@ -598,9 +599,10 @@ function addFileToBuffer(filename, subtitleFile='') {
         if ($("#"+fileId).length > 0){
             if ($("#"+fileId+" source").length > 0)
                 $("#"+fileId+" source").attr('src', videoFolder + filename);
-        } else
+        } 
+        else
             $("#videos-container").append(
-                '<video id="'+fileId+'" class="hidden-element" width="100%" autoplay loop muted>' +
+                '<video id="'+fileId+'" class="hidden-element" width="100%" '+(!isTransition?'autoplay loop':'')+' muted>' +
                     '<source src="'+videoFolder + filename+'" type="video/'+getExtension(filename).replace('.','')+'">' +
                         '<track ' +
                             'label="English" ' +
@@ -611,10 +613,6 @@ function addFileToBuffer(filename, subtitleFile='') {
                         '/>' +
                 '</video>'
             );
-            if (subtitleFile != '') {                
-                $("#"+fileId+" track").attr('src', subtitleFolder+subtitleFile);
-                document.getElementById(fileId).textTracks[0].mode = 'hidden';               
-            }
     }
 }
 
