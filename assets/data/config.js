@@ -1,5 +1,8 @@
 data = 
     '{' +
+        '"audio-enabled": true,' +
+        '"guided-tour-enabled": true,' +
+        '"caption-enabled": true,' +
         '"image-folder": "./assets/img/",' +
         '"video-folder": "./assets/videos/",' +
         '"audio-folder": "./assets/audios/",' +
@@ -189,9 +192,9 @@ data =
                     '},' +  
                     '{' +
                         '"item-name": "Accelerated Access",' +
-                        '"item-image":"TO_AcceleratedAccess.mp4",' +
-                        '"transition-time": 2000,' +          
-                        '"page-number-next":20' +           
+                        /*'"item-image":"TO_AcceleratedAccess.mp4",' +
+                        '"transition-time": 2000,' +*/          
+                        '"page-number-next":0' +           
                     '}' + 
                 '],' +
                 '"page-title-problem":"None",' +

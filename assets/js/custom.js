@@ -1,3 +1,6 @@
+let audioEnabled = false;
+let captionEnabled = false;
+let guidedTourEnabled = false;
 let imageFolder = "";
 let videoFolder = "";
 let audioFolder = "";
@@ -28,6 +31,9 @@ window.onresize = calculate_building_position;
 
 function initialize() {
     var mydata = JSON.parse(data); 
+    audioEnabled = mydata['audio-enabled'];
+    captionEnabled = mydata['caption-enabled'];
+    guidedTourEnabled = mydata['guided-tour-enabled'];
     imageHome = mydata['image-home']; 
     imageFolder = mydata['image-folder'];
     videoFolder = mydata['video-folder'];
@@ -45,6 +51,8 @@ function initialize() {
         calculate_building_position();
     });
     $("#audio-button").on('click', function(){
+        if (!audioEnabled)
+            return;
         var videoActive = $("#videos-container video:not(.hidden-element)");
         if ($(this).attr('state') == 'off') {
             $("#audio-button").removeClass('audio-button-off');
@@ -89,6 +97,8 @@ function initialize() {
         }
     });
     $("#caption-button").on('click', function(){
+        if (!captionEnabled)
+            return;
         var videoActive = $("#videos-container video:not(.hidden-element)");
         var name_element_subtitles = '';
         if (videoActive.length === 0) {
@@ -113,6 +123,8 @@ function initialize() {
         }
     });
     $("#guide-button").on('click', function(){
+        if (!guidedTourEnabled)
+            return;
         if ($(this).attr('state') == 'off') {
             $(this).css('background-color', '#333');
             $(this).css('color', '#FFF');
