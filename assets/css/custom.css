@@ -16,7 +16,7 @@ html, body {
 #main-content {
   width: auto;
   min-width: 1024px;
-  position: relative;   
+  position: relative; 
 }
 
 #back-button {
@@ -33,6 +33,7 @@ html, body {
 
 .building-select {
   position: absolute;
+  z-index: 1;
 }
 
 .building-label {
@@ -158,8 +159,15 @@ html, body {
   z-index: 5;
 }
 
-#homescreen-image, #homescreen-video {
-  width: 100%;
+#images-container, #videos-container {
+  width: 100%;  
+  height: 100%;
+  position: relative;
+}
+
+#images-container img, #videos-container {
+  width: auto;
+  min-height: 768px;
 }
 
 #bottom-menu {
@@ -329,3 +337,80 @@ html, body {
   100% { opacity: 1.0; }
 }
 /* ANIMATION EFFECT FOR SELECTED ITEM IN LIST */
+
+/* FADE IN EFFECT*/
+.fade-in-item {
+  /*position: absolute;*/
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+
+  -webkit-animation-name:fadeIn;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+}
+
+@-moz-keyframes fadeIn{  
+  10% { opacity: 0.9; }
+  30% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.2; }
+  90% { opacity: 0.1; }
+}
+
+@-webkit-keyframes fadeIn {  
+  10% { opacity: 0.9; }
+  30% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.2; }
+  90% { opacity: 0.1; }
+}
+
+@keyframes fadeIn {  
+  10% { opacity: 0.9; }
+  30% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.2; }
+  90% { opacity: 0.1; }
+}
+/* FADE IN EFFECT*/
+
+/* FADE OUT EFFECT*/
+.fade-out-item {
+  /*position: absolute;*/
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+
+  -webkit-animation-name:fadeIn;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+}
+
+@-moz-keyframes fadeOut{  
+  10% { opacity: 0.1; }
+  30% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.7; }
+  90% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeOut {  
+  10% { opacity: 0.1; }
+  30% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.7; }
+  90% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {  
+  10% { opacity: 0.1; }
+  30% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+  70% { opacity: 0.7; }
+  90% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+/* FADE OUT EFFECT*/

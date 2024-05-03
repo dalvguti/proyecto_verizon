@@ -59,16 +59,18 @@
                 <a id="guide-button" state="off"></a>
                 <a id="caption-button" state="off">CC</a>
             </nav>
-            <video id="homescreen-video" class="hidden-element" width="100%" autoplay loop>
-                <source src="" type="">
-                <track
-                    label="English"
-                    kind="subtitles"
-                    srclang="en"
-                    src=""
-                    default 
-                />
-            </video>
+            <div id="videos-container" class="hidden-element">
+                <video id="homescreen-video" class="hidden-element" width="100%" autoplay loop>
+                    <source src="" type="">
+                    <track
+                        label="English"
+                        kind="subtitles"
+                        srclang="en"
+                        src=""
+                        default 
+                    />
+                </video>
+            </div>             
             <audio id="homescreen-audio" class="hidden-element" autoplay>
                 <source src="" type="">
                 <track
@@ -80,7 +82,9 @@
                 />
             </audio>
             <div id="subtitle-content" class="hidden-element"><p id="subtitle-display"></p></div>
-            <img id="homescreen-image" src="" alt="homescreen">
+            <div id="images-container">
+                <img id="home" src="">
+            </div>            
         </div>
     </div>
     <script src="./lib/jquery/jquery-3.7.1.min.js"></script>
