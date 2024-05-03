@@ -318,7 +318,6 @@ function build_page(page_number) {
             if (isVideo(this['page-img'])) {                
                 if (this['page-subtitles'] != undefined) {
                     if (this['page-subtitles']['type'] == 'video') {
-                        console.log(getFileName(this['page-img']));
                         $("#"+getFileName(this['page-img'])+" track").attr('src', subtitleFolder+this['page-subtitles']['file']);
                         document.getElementById(getFileName(this['page-img'])).textTracks[0].mode = 'hidden';  
                         $("#homescreen-audio track").attr('src', '');
@@ -403,6 +402,14 @@ function build_page(page_number) {
             }
             $('#back-button').on('click', function(){
                 var timeTransition = 0;
+                var videoActive = $("#videos-container video:not(.hidden-element)");
+                console.log(videoActive);
+                $("#homescreen-audio")[0].pause();
+                $("#homescreen-audio")[0].currentTime = 0;
+                if (videoActive.length > 0) {
+                    $(videoActive[0])[0].pause();
+                    $(videoActive[0])[0].currentTime = 0;
+                }
                 if ($("#back-button").attr('page-transition') != undefined){
                     timeTransition = $("#back-button").attr('page-transition-time');
                     hide_building_names();
