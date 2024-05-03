@@ -211,7 +211,7 @@ function build_page(page_number) {
             $(this['menu-items']).each(function(){
                 var new_ele = $("<a item-image='"+this['item-image']+"' next-page='"+this['page-number-next']+"' transition-time='"+(this['transition-time']!=undefined?this['transition-time']:0)+"'>"+this['item-name']+"</a>");
                 if (this['item-image'] != undefined) {
-                    addFileToBuffer(this['item-image']);                    
+                    addFileToBuffer(this['item-image'], true);                    
                 }
                 $("#building-menu-items").append(new_ele); 
                 if (page_number === 1) {
@@ -542,7 +542,7 @@ function uploadNextPageMedia(next_page) {
                 addFileToBuffer(this['page-transition-out'], true);
             $(this['menu-items']).each(function(){
                 if (this['item-image'] != undefined)
-                    addFileToBuffer(this['item-image']);
+                    addFileToBuffer(this['item-image'], true);
                 if (this['page-number-next'] != undefined) {
                     if (this['page-number-next'] != 0)
                         uploadNextPageMedia(this['page-number-next']);
@@ -550,7 +550,7 @@ function uploadNextPageMedia(next_page) {
             });
             $(this['menu-items-problem']).each(function(){
                 if (this['item-image'] != undefined)
-                    addFileToBuffer(this['item-image']);
+                    addFileToBuffer(this['item-image'], true);
                 if (this['page-number-next'] != undefined) {
                     if (this['page-number-next'] != 0)
                         uploadNextPageMedia(this['page-number-next']);
@@ -558,7 +558,7 @@ function uploadNextPageMedia(next_page) {
             });
             $(this['menu-items-work']).each(function(){
                 if (this['item-image'] != undefined)
-                    addFileToBuffer(this['item-image']);
+                    addFileToBuffer(this['item-image'], true);
                 if (this['page-number-next'] != undefined) {
                     if (this['page-number-next'] != 0)
                         uploadNextPageMedia(this['page-number-next']);
