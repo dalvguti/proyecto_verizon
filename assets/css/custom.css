@@ -386,37 +386,37 @@ html, body {
 .fade-out-item {
   /*position: absolute;*/
   animation-name: fadeOut;
-  animation-duration: 1s;
+  animation-duration: 5s;
   animation-timing-function: linear;
 
   -webkit-animation-name:fadeIn;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: 5s;
   -webkit-animation-timing-function: linear;
 }
 
 @-moz-keyframes fadeOut{  
-  10% { opacity: 0.1; }
-  30% { opacity: 0.2; }
-  50% { opacity: 0.5; }
-  70% { opacity: 0.7; }
+  10% { opacity: 0.5; }
+  30% { opacity: 0.6; }
+  50% { opacity: 0.7; }
+  70% { opacity: 0.8; }
   90% { opacity: 0.9; }
   100% { opacity: 1; }
 }
 
 @-webkit-keyframes fadeOut {  
-  10% { opacity: 0.1; }
-  30% { opacity: 0.2; }
-  50% { opacity: 0.5; }
-  70% { opacity: 0.7; }
+  10% { opacity: 0.5; }
+  30% { opacity: 0.6; }
+  50% { opacity: 0.7; }
+  70% { opacity: 0.8; }
   90% { opacity: 0.9; }
   100% { opacity: 1; }
 }
 
 @keyframes fadeOut {  
-  10% { opacity: 0.1; }
-  30% { opacity: 0.2; }
-  50% { opacity: 0.5; }
-  70% { opacity: 0.7; }
+  10% { opacity: 0.5; }
+  30% { opacity: 0.6; }
+  50% { opacity: 0.7; }
+  70% { opacity: 0.8; }
   90% { opacity: 0.9; }
   100% { opacity: 1; }
 }

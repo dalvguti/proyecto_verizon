@@ -102,10 +102,11 @@ function initialize() {
         var videoActive = $("#videos-container video:not(.hidden-element)");
         var name_element_subtitles = '';
         if (videoActive.length === 0) {
-            name_element_subtitles = 'homescreen-audio';
+            name_element_subtitles = $("#homescreen-audio track").attr('src') != '' ? 'homescreen-audio':'';
         } else {
-            name_element_subtitles = $(videoActive[0]).attr('id');
+            name_element_subtitles =$(videoActive[0]).find('track').attr('src') != '' ? $(videoActive[0]).attr('id'):'';
         }
+        console.log(name_element_subtitles);
         if ($(this).attr('state') == 'off') {
             $(this).css('background-color', '#333');
             $(this).css('color', '#FFF');
@@ -350,26 +351,29 @@ function build_page(page_number) {
                         $("#subtitle-content").removeClass('hidden-element');
                     else
                         $("#subtitle-content").addClass('hidden-element');                  
+                    document.getElementById(getFileName(this['page-img'])).textTracks[0].removeEventListener('cuechange', function() {
+                        try {
+                            if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
+                                $("#subtitle-content").removeClass('hidden-element');
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
+                        } catch (error) {
+                            $("#subtitle-content").addClass('hidden-element');
+                        }                    
+                    });
+                    document.getElementById(getFileName(this['page-img'])).textTracks[0].addEventListener('cuechange', function() {
+                        try {
+                            if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
+                                $("#subtitle-content").removeClass('hidden-element');
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
+                        } catch (error) {
+                            $("#subtitle-content").addClass('hidden-element');
+                        }             
+                    });
+                } else {
+                    $("#subtitle-content").addClass('hidden-element');                  
+                    $("#subtitle-display").html('');                  
                 }
-                document.getElementById(getFileName(this['page-img'])).load();
-                document.getElementById(getFileName(this['page-img'])).textTracks[0].removeEventListener('cuechange', function() {
-                    try {
-                        if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
-                            $("#subtitle-content").removeClass('hidden-element');
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
-                    } catch (error) {
-                        $("#subtitle-content").addClass('hidden-element');
-                    }                    
-                });
-                document.getElementById(getFileName(this['page-img'])).textTracks[0].addEventListener('cuechange', function() {
-                    try {
-                        if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
-                            $("#subtitle-content").removeClass('hidden-element');
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
-                    } catch (error) {
-                        $("#subtitle-content").addClass('hidden-element');
-                    }             
-                });
+                document.getElementById(getFileName(this['page-img'])).load();                
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#"+getFileName(this['page-img'])).prop('muted', false);
                 }else {
@@ -388,26 +392,30 @@ function build_page(page_number) {
                         $("#subtitle-content").removeClass('hidden-element');
                     else
                         $("#subtitle-content").addClass('hidden-element');                    
+                    document.getElementById('homescreen-audio').textTracks[0].removeEventListener('cuechange', function() {
+                        try {
+                            if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
+                                $("#subtitle-content").removeClass('hidden-element');
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
+                        } catch (error) {
+                            $("#subtitle-content").addClass('hidden-element');
+                        }                 
+                    });
+                    document.getElementById('homescreen-audio').textTracks[0].addEventListener('cuechange', function() {
+                        try {
+                            if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
+                                $("#subtitle-content").removeClass('hidden-element');
+                            document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
+                        } catch (error) {
+                            $("#subtitle-content").addClass('hidden-element');
+                        } 
+                    });
+                } else {
+                    $("#subtitle-content").addClass('hidden-element');                  
+                    $("#subtitle-display").html('');                  
                 }
                 $("#homescreen-audio")[0].load();
-                document.getElementById('homescreen-audio').textTracks[0].removeEventListener('cuechange', function() {
-                    try {
-                        if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
-                            $("#subtitle-content").removeClass('hidden-element');
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
-                    } catch (error) {
-                        $("#subtitle-content").addClass('hidden-element');
-                    }                 
-                });
-                document.getElementById('homescreen-audio').textTracks[0].addEventListener('cuechange', function() {
-                    try {
-                        if ($("#caption-button").attr('state') == 'on' && $("#audio-button").attr('state') == 'on')
-                            $("#subtitle-content").removeClass('hidden-element');
-                        document.getElementById('subtitle-display').innerText = this.activeCues[0].text;                    
-                    } catch (error) {
-                        $("#subtitle-content").addClass('hidden-element');
-                    } 
-                });
+                
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#homescreen-audio")[0].play();
                 }else {
@@ -536,6 +544,7 @@ function clearElements() {
     $("#homescreen-audio")[0].load();
     $('#back-button').unbind('click');
     $("#subtitle-content").addClass('hidden-element');
+    $("#subtitle-display").html('');
 }
 
 function resetGuidedTourStates() {
