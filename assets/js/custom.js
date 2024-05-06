@@ -71,7 +71,7 @@ function initialize() {
                 if (!guidedTourFlag) {
                     $(videoActive[0])[0].pause();
                     $(videoActive[0])[0].currentTime = 0;
-                    //$(videoActive[0])[0].load();
+                    $(videoActive[0])[0].play();
                 }
             }           
         } else {
@@ -79,7 +79,6 @@ function initialize() {
             $("#audio-button").addClass('audio-button-off');
             $("#audio-button").attr('state', 'off');
             if (videoActive.length === 0) {
-                //$("#homescreen-audio")[0].pause();
                 $("#homescreen-audio").prop('muted', true);
                 if (!guidedTourFlag) {
                     $("#homescreen-audio")[0].pause();
@@ -91,7 +90,6 @@ function initialize() {
                 if (!guidedTourFlag) {
                     $(videoActive[0])[0].pause();
                     $(videoActive[0])[0].currentTime = 0;
-                    //$(videoActive[0])[0].load();
                 }
             } 
         }
@@ -373,7 +371,6 @@ function build_page(page_number) {
                     $("#subtitle-content").addClass('hidden-element');                  
                     $("#subtitle-display").html('');                  
                 }
-                //document.getElementById(getFileName(this['page-img'])).load();                
                 if ($("#audio-button").attr('state') === 'on') {
                     $("#"+getFileName(this['page-img'])).prop('muted', false);
                 }else {
@@ -434,14 +431,8 @@ function build_page(page_number) {
             }
             $('#back-button').on('click', function(){
                 var timeTransition = 0;
-                var videoActive = $("#videos-container video:not(.hidden-element)");
-                console.log(videoActive);
                 $("#homescreen-audio")[0].pause();
                 $("#homescreen-audio")[0].currentTime = 0;
-                if (videoActive.length > 0) {
-                    $(videoActive[0])[0].pause();
-                    $(videoActive[0])[0].currentTime = 0;
-                }
                 if ($("#back-button").attr('page-transition') != undefined){
                     timeTransition = $("#back-button").attr('page-transition-time');
                     hide_building_names();
@@ -672,8 +663,9 @@ function recalculteImageAndVideoSizes() {
 }
 
 function resetAllVideos() {
-    $("#videosContainer video").each(function(){
-        this[0].pause();
-        this[0].currentTime = 0;
-    });
+    var videoActive = $("#videos-container video:not(.hidden-element)");
+    if (videoActive.length > 0) {
+        $(videoActive[0])[0].pause();
+        $(videoActive[0])[0].currentTime = 0;    
+    }    
 }
