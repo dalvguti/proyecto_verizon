@@ -20,6 +20,9 @@ html, body {
 }
 
 #back-button {
+  font-family: VerizonNHGeTX-Bold;
+  font-size: 1.5vh;
+  line-height: 1.5vh;;
   position: absolute;
   bottom: 15px;
   left: 2%;
@@ -29,6 +32,7 @@ html, body {
   background-color: black;
   padding: 5px 20px 5px 20px;
   z-index: 4;
+  height: 4vh;
 }
 
 .building-select {
