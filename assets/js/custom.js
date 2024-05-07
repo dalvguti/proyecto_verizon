@@ -53,7 +53,7 @@ function initialize() {
     $("#audio-button").on('click', function(){
         if (!audioEnabled)
             return;
-        var videoActive = $("#videos-container video:not(.hidden-element)");
+        var videoActive = $("#buffer-container video:not(.hidden-element)");
         if ($(this).attr('state') == 'off') {
             $("#audio-button").removeClass('audio-button-off');
             $("#audio-button").addClass('audio-button-on');
@@ -97,7 +97,7 @@ function initialize() {
     $("#caption-button").on('click', function(){
         if (!captionEnabled)
             return;
-        var videoActive = $("#videos-container video:not(.hidden-element)");
+        var videoActive = $("#buffer-container video:not(.hidden-element)");
         var name_element_subtitles = '';
         if (videoActive.length === 0) {
             name_element_subtitles = $("#homescreen-audio track").attr('src') != '' ? 'homescreen-audio':'';
@@ -496,26 +496,14 @@ function executeTransition(filename, showBuildingMenu=false) {
     else
         $("#building-menu").addClass('hidden-element');
 
-    activeImage = $("#images-container img:not(.hidden-element)");
-    activeVideo = $("#videos-container video:not(.hidden-element)");
-
-    $("#videos-container video").addClass('hidden-element');
-    $("#images-container img").addClass('hidden-element');
-    if (activeVideo.length > 0) { //video is active        
-        if (!isVideo(filename))
-            $("#videos-container").addClass('hidden-element');
-    } else {        
-        if (isVideo(filename))
-            $("#images-container").addClass('hidden-element');
-    }
-
+    $("#buffer-container video").addClass('hidden-element');
+    $("#buffer-container img").addClass('hidden-element');
+    
     if (isVideo(filename)) {
         $("#"+divId).removeClass('hidden-element');
-        document.getElementById(divId).play();
-        $("#videos-container").removeClass('hidden-element');        
+        document.getElementById(divId).play();                
     } else {     
-        $("#"+divId).removeClass('hidden-element');
-        $("#images-container").removeClass('hidden-element');    
+        $("#"+divId).removeClass('hidden-element');    
     }    
 }
 
@@ -626,14 +614,14 @@ function addFileToBuffer(filename, isTransition=false) {
             if ($("#"+fileId).attr('src') == '')
                 $("#"+fileId).attr('src', imageFolder + filename);
         } else
-            $("#images-container").append("<img id='"+fileId+"' src='"+imageFolder + filename+"' class='hidden-element'>");
+            $("#buffer-container").append("<img id='"+fileId+"' src='"+imageFolder + filename+"' class='hidden-element'>");
     } else { //video
         if ($("#"+fileId).length > 0){
             if ($("#"+fileId+" source").length > 0)
                 $("#"+fileId+" source").attr('src', videoFolder + filename);
         } 
         else
-            $("#videos-container").append(
+            $("#buffer-container").append(
                 '<video id="'+fileId+'" class="hidden-element" width="100%" '+(!isTransition?'autoplay loop':'')+' muted>' +
                     '<source src="'+videoFolder + filename+'" type="video/'+getExtension(filename).replace('.','')+'">' +
                         '<track ' +
@@ -652,18 +640,18 @@ function recalculteImageAndVideoSizes() {
     if (getComputedStyle(document.getElementById("home")).width.replace('px','') !== 'auto')
         imageWidth = getComputedStyle(document.getElementById("home")).width.replace('px','');    
     if (imageWidth > 1024) {
-        $('#images-container img').css('max-height', (document.body.offsetHeight * 0.99)+'px');
-        $('#videos-container video').css('max-height', (document.body.offsetHeight * 0.99)+'px');
+        $('#buffer-container img').css('max-height', (document.body.offsetHeight * 0.99)+'px');
+        $('#buffer-container video').css('max-height', (document.body.offsetHeight * 0.99)+'px');
         $('#main-content').css('overflow', 'hidden');
     } else {
-        $('#images-container img').css('max-height', '');
-        $('#videos-container video').css('max-height', '');
+        $('#buffer-container img').css('max-height', '');
+        $('#buffer-container video').css('max-height', '');
         $('#main-content').css('overflow', 'visible');
     }
 }
 
 function resetAllVideos() {
-    var videoActive = $("#videos-container video:not(.hidden-element)");
+    var videoActive = $("#buffer-container video:not(.hidden-element)");
     if (videoActive.length > 0) {
         $(videoActive[0])[0].pause();
         $(videoActive[0])[0].currentTime = 0;    
