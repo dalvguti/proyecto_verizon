@@ -19,6 +19,42 @@ html, body {
   position: relative; 
 }
 
+#dialog-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 8;
+}
+
+#dialog-image-background {
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+  opacity: 0.8;
+  position: absolute;
+  z-index: 7;
+}
+
+#dialog-image-container {
+  position: relative;
+  display: flex;
+  height: 60%;
+}
+
+#dialog-image-close {
+  position: absolute;
+  font-family: VerizonNHGeTX-Bold;
+  font-size: 1.5vh;
+  top: 1vh;
+  left: 1vh;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+
 #back-button {
   font-family: VerizonNHGeTX-Bold;
   font-size: 1.5vh;
@@ -31,7 +67,7 @@ html, body {
   opacity: 0.8;
   background-color: black;
   padding: 5px 20px 5px 20px;
-  z-index: 4;
+  z-index: 10;
   height: 4vh;
 }
 
@@ -163,13 +199,13 @@ html, body {
   z-index: 5;
 }
 
-#images-container, #videos-container {
+#buffer-container {
   width: 100%;  
   height: 100%;
   position: relative;
 }
 
-#images-container img, #videos-container {
+#buffer-container img, #buffer-container video {
   width: auto;
   min-height: 768px;
 }
@@ -183,7 +219,7 @@ html, body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  z-index: 3;
+  z-index: 9;
 }
 
 #bottom-menu a {
@@ -193,8 +229,14 @@ html, body {
   background-color: white;
   padding: 5px;
   cursor: grab;
-  opacity: 0.8;
-  line-height: 1.5vh;  
+  opacity: 0.8; 
+}
+
+#dialog-button {
+  width: 2.5vw;
+  background-size: 2vw 3vh;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #audio-button {
@@ -210,6 +252,14 @@ html, body {
 
 .audio-button-off {
   background-image: url(../img/sound_off.png);
+}
+
+.dialog-button-on {
+  background-image: url(../img/network_white.png);
+}
+
+.dialog-button-off {
+  background-image: url(../img/network_black.png);
 }
 
 #bar-button {
@@ -242,6 +292,10 @@ html, body {
   opacity: 0.8 !important; 
   background-color: #333 !important; 
   color: #fff !important;
+}
+
+.char{
+  font-family: "Times", "Times New Roman", "serif", "sans-serif", system-ui, -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif, "EmojiSymbols";
 }
 
 /* COUNTDOWN STYLE BEGINING*/
@@ -287,7 +341,7 @@ html, body {
   background-color: #333;
   opacity: 0.8;
   position: absolute;
-  z-index: 101;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -13,6 +13,13 @@
     </div>
     <div id="content">
         <div id="main-content">
+            <div id="dialog-image-background" class="hidden-element"></div>
+            <div id="dialog-image" class="hidden-element">
+                <div id="dialog-image-container">
+                    <button id="dialog-image-close">X</button>
+                    <img src=""/>
+                </div>                
+            </div>
             <div id="countdown" class="hidden-element"></div>
             <div id="building-menu">
                 <div id="building-menu-overlay" class="hidden-element"></div>
@@ -48,6 +55,7 @@
             <div id="building6" class="building-select"><div class="building-label"></div></div>
             <button id="back-button"></button>
             <nav id="bottom-menu">
+                <a id="dialog-button" state="off" class="hidden-element dialog-button-off"></a>
                 <a id="audio-button" state="off" class="audio-button-off"></a>
                 <a id="bar-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2vw" height="3vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">

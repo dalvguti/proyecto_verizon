@@ -174,6 +174,7 @@ data =
                     '"type":"audio",' +
                     '"file":"ConventionCenter_Building.vtt"' +
                 '},' +
+                '"page-dialog-image":"Slide1.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"Convention Center home screen",' +
                 '"page-transition-out":"from_convention_center.mp4",' +
@@ -217,6 +218,7 @@ data =
                 '"page-number-previous":2,' +
                 '"page-building":"building1",' +
                 '"page-img":"MultiCarrier.mp4",' +
+                '"page-dialog-image":"Slide1.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-transition-out":"FROM_MultiCarrier.mp4",' +
                 '"page-transition-time":1700,' +
@@ -417,12 +419,12 @@ data =
                 '"page-building":"building1",' +
                 '"page-img":"PrivateNetwork_Infinite.mp4",' +
                 '"page-name":"Convention Center",' +
-                '"page-title":"Private Wireless Solution",' +
+                '"page-title":"Private Wireless Network",' +
                 '"page-description":[' +
                     '{"0":"Private connections for employees and venue devices."},' +
                     '{"1":"Terminates on a private wireless core."},' +
                     '{"2":"Sets a new standard for digital excellence in event spaces."},' +
-                    '{"3":"Fast separate and secure network environment separate from public carriers."}' +
+                    '{"3":"Fast, separate and secure network environment separate from public carriers."}' +
                 '],' +
                 '"menu-items": [' +
                         '{' +
@@ -460,6 +462,7 @@ data =
                 '"page-number-previous":2,' +
                 '"page-building":"building1",' +
                 '"page-img":"Cashierless.mp4",' +
+                '"page-dialog-image":"Slide1.png",' +
                 '"page-name":"Convention Center",' +
                 '"menu-left": true,' +
                 '"page-title":"Solution",' +
@@ -640,6 +643,7 @@ data =
                 '"page-transition-out":"FROM_AcceleratedAccess.mp4",' +
                 '"page-transition-time":2500,' +
                 '"menu-left":true,' +
+                '"page-dialog-image":"Slide1.png",' +
                 '"page-name":"Convention Center",' +
                 '"page-title":"The Solution",' +
                 '"page-description":[' +
